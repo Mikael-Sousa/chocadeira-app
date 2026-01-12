@@ -12,7 +12,6 @@ export function createStyles(theme: {
       flex: 1,
       backgroundColor: theme.backgroundMain,
       paddingHorizontal: 20,
-      paddingVertical: 10,
       justifyContent: "space-between",
       width: "100%",
     },

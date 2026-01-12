@@ -1,24 +1,71 @@
-import express from "express";
-import http from "http";
-import { Server } from "socket.io";
-import { SerialPort, ReadlineParser } from "serialport";
+import WebSocket, { WebSocketServer } from "ws";
 
-const app = express();
-const server = http.createServer(app);
-const io = new Server(server);
+type Cliente = {
+  deviceId: string;
+};
 
-const port = new SerialPort({ path: "COM3", baudRate: 9600 });
-const parser = port.pipe(new ReadlineParser({ delimiter: "\n" }));
+const wss = new WebSocketServer({ port: 8080 });
+const clientes = new Map<WebSocket, Cliente>();
 
-parser.on("data", (data) => {
-  try {
-    const json = JSON.parse(data);
-    io.emit("dados", json); 
-  } catch (err) {
-    console.error("Erro ao ler JSON:", err);
-  }
+wss.on("connection", (ws) => {
+  console.log("🔌 Conexão recebida");
+
+  ws.on("message", (msg) => {
+    let dados;
+    try {
+      dados = JSON.parse(msg.toString());
+    } catch {
+      return;
+    }
+
+    // ===== REGISTRO =====
+    if (dados.deviceId) {
+      clientes.set(ws, { deviceId: dados.deviceId });
+      console.log("✅ Registrado:", dados.deviceId);
+      return;
+    }
+
+    const cliente = clientes.get(ws);
+    if (!cliente) {
+      console.log("⚠ Cliente não registrado");
+      return;
+    }
+
+    console.log(`📡 ${cliente.deviceId}:`, dados);
+
+    // ===== ENVIAR CONFIGURAÇÃO PARA O ESP =====
+    if (dados.pedirConfig) {
+      ws.send(JSON.stringify({
+        type: "limits",
+        payload: {
+          temp_min: 37.2,
+          temp_max: 37.8,
+          umid_min: 50,
+          umid_max: 60
+        }
+      }));
+      return;
+    }
+
+    // ======== 🔴 AQUI É O QUE FALTAVA 🔴 ========
+    // reenviar dados do ESP para os apps
+    wss.clients.forEach((client) => {
+      if (client.readyState === WebSocket.OPEN) {
+        client.send(JSON.stringify({
+          type: "data",
+          deviceId: cliente.deviceId,
+          payload: dados
+        }));
+      }
+    });
+    // ===========================================
+  });
+
+  ws.on("close", () => {
+    const c = clientes.get(ws);
+    if (c) console.log("❌ Desconectado:", c.deviceId);
+    clientes.delete(ws);
+  });
 });
 
-server.listen(4444, () => {
-  console.log("Servidor rodando em http://localhost:4444");
-});
+console.log("🚀 WebSocket rodando na porta 8080");
