@@ -32,7 +32,7 @@ export type IconName =
   | "information-outline";
 
 export type Item = {
-  icon: IconName;
+  icon?: IconName;
   title: string;
   status: string;
   hiddenStatus: string;

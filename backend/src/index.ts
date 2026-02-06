@@ -8,7 +8,7 @@ const wss = new WebSocketServer({ port: 8080 });
 const clientes = new Map<WebSocket, Cliente>();
 
 wss.on("connection", (ws) => {
-  console.log("🔌 Conexão recebida");
+  console.log("Conexão recebida");
 
   ws.on("message", (msg) => {
     let dados;
@@ -18,22 +18,20 @@ wss.on("connection", (ws) => {
       return;
     }
 
-    // ===== REGISTRO =====
     if (dados.deviceId) {
       clientes.set(ws, { deviceId: dados.deviceId });
-      console.log("✅ Registrado:", dados.deviceId);
+      console.log("Registrado:", dados.deviceId);
       return;
     }
 
     const cliente = clientes.get(ws);
     if (!cliente) {
-      console.log("⚠ Cliente não registrado");
+      console.log("Cliente não registrado");
       return;
     }
 
     console.log(`📡 ${cliente.deviceId}:`, dados);
 
-    // ===== ENVIAR CONFIGURAÇÃO PARA O ESP =====
     if (dados.pedirConfig) {
       ws.send(JSON.stringify({
         type: "limits",
@@ -47,8 +45,6 @@ wss.on("connection", (ws) => {
       return;
     }
 
-    // ======== 🔴 AQUI É O QUE FALTAVA 🔴 ========
-    // reenviar dados do ESP para os apps
     wss.clients.forEach((client) => {
       if (client.readyState === WebSocket.OPEN) {
         client.send(JSON.stringify({
@@ -58,14 +54,13 @@ wss.on("connection", (ws) => {
         }));
       }
     });
-    // ===========================================
   });
 
   ws.on("close", () => {
     const c = clientes.get(ws);
-    if (c) console.log("❌ Desconectado:", c.deviceId);
+    if (c) console.log("Desconectado:", c.deviceId);
     clientes.delete(ws);
   });
 });
 
-console.log("🚀 WebSocket rodando na porta 8080");
+console.log("WebSocket rodando na porta 8080");

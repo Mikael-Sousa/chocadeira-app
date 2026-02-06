@@ -30,7 +30,7 @@ export default function Navbar({ theme, toggleTheme }: Props) {
   const list: Item[] = [
     { icon: "home", route: "/" },
     { icon: "chart-bar", route: "/statistics" },
-    { icon: "thermometer", route: "/temperatureData" },
+    { icon: "thermometer", route: "/temperature" },
     { icon: "history", route: "/history" },
     { icon: "cog", route: "/settings" },
   ];
