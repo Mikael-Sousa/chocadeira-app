@@ -2,12 +2,7 @@ import React from "react";
 import { View } from "react-native";
 import { LineChart } from "react-native-chart-kit";
 import { chartProps, createStyles } from "./styles";
-
-type Props = {
-  indexSelected: number;
-  data: number[][];
-  theme: any;
-};
+import { Props } from "./types";
 
 export default function ChartCard({ indexSelected, data, theme }: Props) {
 

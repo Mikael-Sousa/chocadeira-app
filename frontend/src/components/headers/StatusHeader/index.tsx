@@ -6,12 +6,7 @@ import { View } from "react-native";
 import ArrowButton from "./ArrowButton";
 import ChartCard from "./ChartCard";
 import { createStyles } from "./styles";
-type Props = {
-  title: string;
-  indexSelected: number;
-  setIndexSelected: React.Dispatch<React.SetStateAction<number>>;
-  data: number[][];
-};
+import { Props } from "./types";
 
 export default function App({ indexSelected, setIndexSelected, data, title }: Props) {
   const { theme } = useTheme();         

@@ -3,11 +3,7 @@ import { MaterialCommunityIcons } from "@expo/vector-icons";
 import { Text } from "@/src/components/ui";
 import { View } from "react-native";
 import { createStyles } from "./styles";
-
-type Props = {
-  title: string;
-  icon?: React.ComponentProps<typeof MaterialCommunityIcons>["name"] | "none";
-};
+import { Props } from "./types";
 
 export default function App({ title, icon }: Props) {
   const { theme } = useTheme();

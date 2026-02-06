@@ -4,18 +4,7 @@ import React from "react";
 import { Text } from "@/src/components/ui";
 import { Modal, Pressable, View } from "react-native";
 import { createStyles } from "./styles";
-export type Item = {
-  title: string;
-  status: string;
-  hiddenStatus: string;
-};
-
-type Props = {
-  visible: boolean;
-  setVisible: (value: boolean) => void;
-  data: Item[];
-  selectedItem: number;
-};
+import { Props } from "./types";
 
 export default function AppModal({ visible, setVisible, data, selectedItem }: Props) {
   const { theme } = useTheme(); 

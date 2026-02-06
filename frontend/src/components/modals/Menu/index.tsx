@@ -4,11 +4,7 @@ import React from "react";
 import { Text } from "@/src/components/ui";
 import { Modal, Pressable, View } from "react-native";
 import { createStyles } from "./styles";
-
-type Props = {
-  visible: boolean;
-  setVisible: (v: boolean) => void;
-};
+import { Props } from "./types";
 
 export default function MenuModal({ visible, setVisible }: Props) {
   const { theme, toggleTheme } = useTheme();

@@ -6,47 +6,7 @@ import { Text } from "@/src/components/ui";
 import MenuModal from "../../modals/Menu";
 import AppModal from "../../modals/Modal";
 import { createStyles } from "./styles";
-
-export type IconName =
-  | "thermometer"
-  | "water"
-  | "egg-outline"
-  | "clock-outline"
-  | "sync"
-  | "door-open"
-  | "calendar"
-  | "calendar-month-outline"
-  | "calendar-month"
-  | "calendar-week"
-  | "calendar-week-outline"
-  | "calendar-today"
-  | "calendar-today-outline"
-  | "weather-windy"
-  | "bluetooth"
-  | "wifi"
-  | "numeric"
-  | "view-dashboard-outline"
-  | "theme-light-dark"
-  | "bell-outline"
-  | "translate"
-  | "account-cog-outline"
-  | "information-outline";
-
-export type Item = {
-  icon?: IconName;
-  title: string;
-  status: string;
-  hiddenStatus: string;
-  connection?: boolean;
-};
-
-type Props = {
-  data: Item[];
-  showModal: boolean;
-  showMenu: boolean;
-  title: string;
-  situations?: string[];
-};
+import { Props } from "./types";
 
 export default function InfoCard({ data, showModal, title, showMenu, situations }: Props) {
   const [visible, setVisible] = useState(false);

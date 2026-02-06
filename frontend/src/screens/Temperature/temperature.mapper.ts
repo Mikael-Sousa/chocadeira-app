@@ -1,4 +1,4 @@
-import { Item } from "@/src/components/cards/InfoCard";
+import { Item } from "@/src/components/cards/InfoCard/types";
 import { SensorData } from "./temperature.types";
 
 export function mapTemperatureItems(data: SensorData): Item[] {

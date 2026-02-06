@@ -1,12 +1,7 @@
 import { Text } from "@/src/components/ui";
 import { Pressable, View } from "react-native";
 import { createStyles } from "./styles";
-
-type Props = {
-  title: string;
-  setIndexSelected: React.Dispatch<React.SetStateAction<number>>;
-  theme: any;
-};
+import { Props } from "./types";
 
 export default function ArrowButton({ title, setIndexSelected, theme }: Props) {
   const styles = createStyles(theme);
