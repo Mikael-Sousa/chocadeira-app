@@ -9,7 +9,7 @@ export function StatisticsScreen() {
   const { statistics } = useStatistics();
 
   return (
-    <SafeAreaView style={styles.container} edges={["top", "bottom"]}>
+    <SafeAreaView style={styles.container} edges={[]}>
       <View style={styles.content}>
         <InfoHeader icon="chart-box-outline" title="Dados Gerais" />
         <InfoCard data={statistics} showModal={true} showMenu={false} />

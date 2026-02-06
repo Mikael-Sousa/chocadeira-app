@@ -9,7 +9,7 @@ export function SettingsScreen() {
   const { settings } = useSettings();
 
   return (
-    <SafeAreaView style={styles.container} edges={["top", "bottom"]}>
+    <SafeAreaView style={styles.container} edges={[]}>
       <View style={styles.content}>
         <InfoHeader icon="cog" title="Configurações" />
         <InfoCard data={settings} showModal={false} showMenu={true} />

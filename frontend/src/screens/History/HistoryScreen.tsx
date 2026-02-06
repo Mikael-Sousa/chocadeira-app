@@ -9,7 +9,7 @@ export function HistoryScreen() {
   const { history } = useHistory();
 
   return (
-    <SafeAreaView style={styles.container} edges={["top", "bottom"]} >
+    <SafeAreaView style={styles.container} edges={[]} >
       <View style={styles.content}>
         <InfoHeader icon="history" title="Histórico" />
         <InfoCard data={history} showModal={false} showMenu={false} />
