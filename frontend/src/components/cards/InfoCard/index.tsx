@@ -1,7 +1,8 @@
 import { useTheme } from "@/src/theme/useTheme";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
 import React, { useState } from "react";
-import { Pressable, ScrollView, Text, View } from "react-native";
+import { Pressable, ScrollView, View } from "react-native";
+import { Text } from "@/src/components/ui";
 import MenuModal from "../../modals/Menu";
 import AppModal from "../../modals/Modal";
 import { createStyles } from "./styles";

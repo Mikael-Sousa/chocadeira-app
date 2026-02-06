@@ -1,7 +1,8 @@
 import { useTheme } from "@/src/theme/useTheme";
 import * as SystemUI from "expo-system-ui";
 import { useEffect } from "react";
-import { Text, View } from "react-native";
+import { Text } from "@/src/components/ui";
+import { View } from "react-native";
 import ArrowButton from "./ArrowButton";
 import ChartCard from "./ChartCard";
 import { createStyles } from "./styles";

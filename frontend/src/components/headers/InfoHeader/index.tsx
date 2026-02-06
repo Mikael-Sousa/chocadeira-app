@@ -1,6 +1,7 @@
 import { useTheme } from "@/src/theme/useTheme";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
-import { Text, View } from "react-native";
+import { Text } from "@/src/components/ui";
+import { View } from "react-native";
 import { createStyles } from "./styles";
 
 type Props = {

@@ -1,7 +1,8 @@
 import { useTheme } from "@/src/theme/useTheme";
 import { Ionicons } from "@expo/vector-icons";
 import React from "react";
-import { Modal, Pressable, Text, View } from "react-native";
+import { Text } from "@/src/components/ui";
+import { Modal, Pressable, View } from "react-native";
 import { createStyles } from "./styles";
 export type Item = {
   title: string;

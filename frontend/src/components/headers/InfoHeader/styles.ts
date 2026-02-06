@@ -20,7 +20,6 @@ export function createStyles(theme: any) {
     title: {
       color: theme.primary,
       fontSize: FONTS.fontSize2,
-      fontFamily: FONTS.fontMain,
     },
 
     icon: {

@@ -24,7 +24,6 @@ export function createStyles(theme: {
       marginVertical: 5,
       backgroundColor: theme.background,
       justifyContent: "space-between",
-      fontFamily: FONTS.fontMain,
       borderColor: theme.primary,
       borderWidth: 2,
     },
@@ -34,12 +33,10 @@ export function createStyles(theme: {
     },
     title: {
       color: theme.primary,
-      fontFamily: FONTS.fontMain,
       fontSize: FONTS.fontSize1,
     },
     status: {
       color: theme.primary,
-      fontFamily: FONTS.fontMain,
       fontSize: FONTS.fontSize1,
     },
   });
