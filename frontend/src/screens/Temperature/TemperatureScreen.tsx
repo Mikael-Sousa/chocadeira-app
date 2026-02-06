@@ -1,7 +1,7 @@
 import { SafeAreaView } from "react-native-safe-area-context";
 import { View } from "react-native";
-import InfoCard from "@/src/components/InfoCard";
-import StatusHeader from "@/src/components/StatusHeader";
+import InfoCard from "@/src/components/cards/InfoCard";
+import StatusHeader from "@/src/components/headers/StatusHeader";
 import { useTemperature } from "./useTemperature";
 import { styles } from "./temperature.styles";
 

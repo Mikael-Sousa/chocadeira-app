@@ -2,7 +2,7 @@ import { Slot } from "expo-router";
 import { createContext, useState } from "react";
 import { View } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
-import Navbar from "../components/Navbar";
+import Navbar from "../components/navigation/Navbar";
 
 type ThemeType = {
   primary: string;

@@ -1,4 +1,4 @@
-import { Item } from "@/src/components/InfoCard";
+import { Item } from "@/src/components/cards/InfoCard";
 
 export function useSettings() {
     const settings: Item[] = [

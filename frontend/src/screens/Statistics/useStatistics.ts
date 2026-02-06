@@ -1,4 +1,4 @@
-import { Item } from "@/src/components/InfoCard";
+import { Item } from "@/src/components/cards/InfoCard";
 
 export function useStatistics() {
     const statistics: Item[] = [

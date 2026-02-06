@@ -2,8 +2,8 @@ import { useTheme } from "@/src/theme/useTheme";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
 import React, { useState } from "react";
 import { Pressable, ScrollView, Text, View } from "react-native";
-import MenuModal from "../Menu";
-import AppModal from "../Modal";
+import MenuModal from "../../modals/Menu";
+import AppModal from "../../modals/Modal";
 import { createStyles } from "./styles";
 
 export type IconName =

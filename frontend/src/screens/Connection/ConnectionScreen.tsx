@@ -1,6 +1,6 @@
 import { View } from "react-native";
-import InfoCard from "@/src/components/InfoCard";
-import InfoHeader from "@/src/components/InfoHeader";
+import InfoCard from "@/src/components/cards/InfoCard";
+import InfoHeader from "@/src/components/headers/InfoHeader";
 import { styles } from "./connection.styles";
 import { useConnection } from "./useConnection";
 

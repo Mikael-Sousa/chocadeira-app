@@ -1,7 +1,7 @@
 import { SafeAreaView } from "react-native-safe-area-context";
 import { View } from "react-native";
-import InfoCard from "@/src/components/InfoCard";
-import InfoHeader from "@/src/components/InfoHeader";
+import InfoCard from "@/src/components/cards/InfoCard";
+import InfoHeader from "@/src/components/headers/InfoHeader";
 import { useHistory } from "./useHistory";
 import { styles } from "./history.styles";
 
