@@ -7,6 +7,6 @@ export type Props = {
 
 type Item = {
   title: string;
-  status: string;
-  hiddenStatus: string;
+  status?: string;
+  hiddenStatus?: string;
 };

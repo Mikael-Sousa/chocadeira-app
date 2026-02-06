@@ -12,7 +12,7 @@ export function SettingsScreen() {
     <SafeAreaView style={styles.container} edges={["top", "bottom"]}>
       <View style={styles.content}>
         <InfoHeader icon="cog" title="Configurações" />
-        <InfoCard data={settings} showModal={false} showMenu={true} title="" />
+        <InfoCard data={settings} showModal={false} showMenu={true} />
       </View>
     </SafeAreaView>
   );

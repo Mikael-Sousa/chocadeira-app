@@ -12,7 +12,7 @@ export function StatisticsScreen() {
     <SafeAreaView style={styles.container} edges={["top", "bottom"]}>
       <View style={styles.content}>
         <InfoHeader icon="chart-box-outline" title="Dados Gerais" />
-        <InfoCard data={statistics} showModal={true} showMenu={false} title="" />
+        <InfoCard data={statistics} showModal={true} showMenu={false} />
       </View>
     </SafeAreaView>
   );

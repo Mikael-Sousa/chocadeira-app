@@ -30,7 +30,7 @@ export default function MenuModal({ visible, setVisible }: Props) {
           <Pressable
             style={styles.menuItemDark}
             onPress={() => {
-              if (theme.backgroundMain === "#fff") toggleTheme(); // força para escuro
+              if (theme.backgroundMain === "#fff") toggleTheme();
               setVisible(false);
             }}
           >

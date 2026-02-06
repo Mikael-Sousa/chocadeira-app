@@ -12,7 +12,7 @@ export function HistoryScreen() {
     <SafeAreaView style={styles.container} edges={["top", "bottom"]} >
       <View style={styles.content}>
         <InfoHeader icon="history" title="Histórico" />
-        <InfoCard data={history} showModal={false} showMenu={false} title="" />
+        <InfoCard data={history} showModal={false} showMenu={false} />
       </View>
     </SafeAreaView>
   );

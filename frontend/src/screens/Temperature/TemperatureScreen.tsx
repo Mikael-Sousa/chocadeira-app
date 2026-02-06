@@ -28,7 +28,6 @@ export function TemperatureScreen() {
           data={list}
           showModal={false}
           showMenu={false}
-          title=""
           situations={situations}
         />
       </View>
