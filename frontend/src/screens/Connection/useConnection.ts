@@ -1,18 +1,13 @@
 import { Item } from "@/src/components/cards/InfoCard/types";
 
-export function useConnection() {
+export function useConnection(connected: boolean) {
+
+  
   const connections: Item[] = [
     {
       icon: "wifi",
       title: "Wi-Fi",
-      connection: true,
-      status: "",
-      hiddenStatus: ""
-    },
-    {
-      icon: "bluetooth",
-      title: "Bluetooth",
-      connection: false,
+      connection: connected,
       status: "",
       hiddenStatus: ""
     },

@@ -4,8 +4,7 @@ import { View } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { useFonts } from "expo-font";
 import Navbar from "../components/navigation/Navbar";
-import { Text } from "@/src/components/ui";
-
+import { WebSocketProvider } from "@/src/contexts/websocket/WebSocketProvider";
 
 type ThemeType = {
   primary: string;
@@ -38,7 +37,6 @@ const dark = {
   fontRegular: "Caprasimo-Regular",
 };
 
-
 export default function Layout() {
   const [theme, setTheme] = useState(light);
 
@@ -54,13 +52,15 @@ export default function Layout() {
 
   return (
     <ThemeContext.Provider value={{ theme, toggleTheme }}>
-      <SafeAreaView style={{ flex: 1, backgroundColor: theme.backgroundMain }}>
-        <View style={{ flex: 1 }}>
-          <Slot />
-        </View>
+      <WebSocketProvider>
+        <SafeAreaView style={{ flex: 1, backgroundColor: theme.backgroundMain }}>
+          <View style={{ flex: 1 }}>
+            <Slot />
+          </View>
 
-        <Navbar theme={theme} toggleTheme={toggleTheme} />
-      </SafeAreaView>
+          <Navbar theme={theme} toggleTheme={toggleTheme} />
+        </SafeAreaView>
+      </WebSocketProvider>
     </ThemeContext.Provider>
   );
 }
