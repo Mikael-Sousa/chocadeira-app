@@ -14,16 +14,15 @@ export function ConnectionScreen() {
       <InfoHeader title="Chokedex" />
 
       <InfoCard
+        typeMenu={"wi-fi"}
         data={connections}
-        showModal={false}
-        showMenu={false}
         title="Conexão"
+        showMenu={true}
       />
 
       <InfoCard
         data={lastConnection}
-        showModal
-        showMenu={false}
+        showModal={true}
         title="Última conexão"
         situations={[]}
       />

@@ -1,4 +1,6 @@
 export type Props = {
   visible: boolean;
-  setVisible: (v: boolean) => void;
+  setVisible: (value: boolean) => void;
+  typeMenu: string | undefined;
+  setVisibleSlides?: (value: boolean) => void;
 };

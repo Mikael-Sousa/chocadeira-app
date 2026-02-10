@@ -13,6 +13,8 @@ export function createStyles(theme: any) {
     modalView: {
       width: "90%",
       backgroundColor: theme.background,
+      borderWidth: 2,
+      borderColor: theme.primary,
       borderRadius: 20,
       paddingVertical: 25,
       paddingHorizontal: 22,
@@ -26,6 +28,19 @@ export function createStyles(theme: any) {
       marginBottom: 20,
       color: theme.primary,
       textTransform: "uppercase",
+    },
+
+    menuItem: {
+      width: "100%",
+      flexDirection: "row",
+      alignItems: "center",
+      backgroundColor: theme.background,
+      paddingVertical: 14,
+      paddingHorizontal: 14,
+      borderRadius: 14,
+      marginBottom: 12,
+      borderWidth: 2,
+      borderColor: theme.secondary,
     },
 
     menuItemLight: {
@@ -58,6 +73,12 @@ export function createStyles(theme: any) {
       fontSize: 26,
       color: theme.secondary,
       marginRight: 12,
+    },
+
+    menuText: {
+      fontSize: 18,
+      fontWeight: "600",
+      color: theme.primary,
     },
 
     menuTextLight: {

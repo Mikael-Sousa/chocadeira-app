@@ -1,5 +1,5 @@
 export type Props = {
-  title: string;
+  title?: string;
   indexSelected: number;
   setIndexSelected: React.Dispatch<React.SetStateAction<number>>;
   data: number[][];

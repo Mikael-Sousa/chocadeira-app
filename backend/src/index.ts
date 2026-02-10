@@ -31,7 +31,7 @@ setInterval(() => {
     }
   });
 
-  console.log("📤 Dados enviados:", payload);
+  console.log("Dados enviados:", payload);
 }, 5000); */
 
 
@@ -58,7 +58,7 @@ wss.on("connection", (ws) => {
       return;
     }
 
-    console.log(`📡 ${cliente.deviceId}:`, dados);
+    console.log(`${cliente.deviceId}:`, dados);
 
     if (dados.pedirConfig) {
       ws.send(JSON.stringify({

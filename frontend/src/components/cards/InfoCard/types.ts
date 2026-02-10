@@ -2,9 +2,12 @@ import type { IconName } from "@/src/types/icons";
 
 export type Props = {
   data: Item[];
-  showModal: boolean;
-  showMenu: boolean;
+  showModal?: boolean;
+  showMenu?: boolean;
+  showSlides?: boolean;
+  setVisibleSlides?: (value: boolean) => void;
   title?: string;
+  typeMenu?: string;
   situations?: string[];
 };
 

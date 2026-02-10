@@ -13,7 +13,7 @@ export function connectStatusSocket({
   onData,
   onAlert,
 }: Callbacks) {
-  const ws = new WebSocket("ws://localhost:8080");
+  const ws = new WebSocket("ws://10.18.70.124:8080");
 
   ws.onopen = () => {
     onOpen?.();

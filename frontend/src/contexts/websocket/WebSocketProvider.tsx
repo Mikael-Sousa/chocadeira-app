@@ -10,9 +10,9 @@ export function WebSocketProvider({ children }: { children: React.ReactNode }) {
   const [connected, setConnected] = useState(false);
   const [sensorData, setSensorData] = useState<SensorData>({});
   const [history, setHistory] = useState<number[][]>([
-    [0, 0, 0, 0, 0],
-    [0, 0, 0, 0, 0],
-    [0, 0, 0, 0, 0],
+    [0, 0, 0, 0, 0, 0, 0, 0, 0,0],
+    [0, 0, 0, 0, 0, 0, 0, 0, 0,0],
+    [0, 0, 0, 0, 0, 0, 0, 0, 0,0],
   ]);
 
   useEffect(() => {

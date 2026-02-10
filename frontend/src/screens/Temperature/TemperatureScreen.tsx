@@ -26,8 +26,6 @@ export function TemperatureScreen() {
 
         <InfoCard
           data={list}
-          showModal={false}
-          showMenu={false}
           situations={situations}
         />
       </View>

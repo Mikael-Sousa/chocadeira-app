@@ -1,24 +1,3 @@
-export type IconName =
-  | "thermometer"
-  | "water"
-  | "egg-outline"
-  | "clock-outline"
-  | "sync"
-  | "door-open"
-  | "calendar"
-  | "calendar-month-outline"
-  | "calendar-month"
-  | "calendar-week"
-  | "calendar-week-outline"
-  | "calendar-today"
-  | "calendar-today-outline"
-  | "weather-windy"
-  | "bluetooth"
-  | "wifi"
-  | "numeric"
-  | "view-dashboard-outline"
-  | "theme-light-dark"
-  | "bell-outline"
-  | "translate"
-  | "account-cog-outline"
-  | "information-outline";
+import { MaterialCommunityIcons } from "@expo/vector-icons";
+
+export type IconName = keyof typeof MaterialCommunityIcons.glyphMap;

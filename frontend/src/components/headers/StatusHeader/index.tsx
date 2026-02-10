@@ -3,18 +3,34 @@ import * as SystemUI from "expo-system-ui";
 import { useEffect } from "react";
 import { Text } from "@/src/components/ui";
 import { View } from "react-native";
-import ArrowButton from "./ArrowButton";
+
+import ArrowButton from "../../buttons/ArrowButton";
 import ChartCard from "./ChartCard";
 import { createStyles } from "./styles";
 import { Props } from "./types";
 
-export default function App({ indexSelected, setIndexSelected, data, title }: Props) {
-  const { theme } = useTheme();         
-  const styles = createStyles(theme);    
+export default function App({
+  indexSelected,
+  setIndexSelected,
+  data,
+  title,
+}: Props) {
+  const { theme } = useTheme();
+  const styles = createStyles(theme);
 
   useEffect(() => {
-    SystemUI.setBackgroundColorAsync(theme.backgroundMain); 
+    SystemUI.setBackgroundColorAsync(theme.backgroundMain);
   }, [theme]);
+
+  const maxIndex = data.length - 1;
+
+  function goLeft() {
+    setIndexSelected((prev) => (prev === 0 ? maxIndex : prev - 1));
+  }
+
+  function goRight() {
+    setIndexSelected((prev) => (prev === maxIndex ? 0 : prev + 1));
+  }
 
   return (
     <View style={styles.container}>
@@ -23,9 +39,23 @@ export default function App({ indexSelected, setIndexSelected, data, title }: Pr
       </View>
 
       <View style={styles.content2}>
-        <ArrowButton title="left" setIndexSelected={setIndexSelected} theme={theme} />
-        <ChartCard indexSelected={indexSelected} data={data} theme={theme} />
-        <ArrowButton title="right" setIndexSelected={setIndexSelected} theme={theme} />
+        <ArrowButton
+          direction="left"
+          theme={theme}
+          onPress={goLeft}
+        />
+
+        <ChartCard
+          indexSelected={indexSelected}
+          data={data}
+          theme={theme}
+        />
+
+        <ArrowButton
+          direction="right"
+          theme={theme}
+          onPress={goRight}
+        />
       </View>
     </View>
   );

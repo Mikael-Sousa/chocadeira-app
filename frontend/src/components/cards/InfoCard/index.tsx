@@ -3,14 +3,16 @@ import { MaterialCommunityIcons } from "@expo/vector-icons";
 import React, { useState } from "react";
 import { Pressable, ScrollView, View } from "react-native";
 import { Text } from "@/src/components/ui";
+import ConnectionGuideModal from "../../modals/Slides";
 import MenuModal from "../../modals/Menu";
 import AppModal from "../../modals/Modal";
 import { createStyles } from "./styles";
 import { Props } from "./types";
 
-export default function InfoCard({ data, showModal, title, showMenu, situations }: Props) {
+export default function InfoCard({ data, showModal, title, showMenu, situations, showSlides, typeMenu }: Props) {
   const [visible, setVisible] = useState(false);
   const [menuVisible, setMenuVisible] = useState(false);
+  const [slidesVisible, setSlidesVisible] = useState(false)
   const [selectedItem, setSelectedItem] = useState<number>(0);
 
   const { theme } = useTheme();
@@ -37,11 +39,17 @@ export default function InfoCard({ data, showModal, title, showMenu, situations 
       return;
             }
 
-      if (showMenu && item.title === "Tema") {
+      if (showMenu) {
         setMenuVisible(true);
       return;
             }
+
+            if (showSlides) {
+      setSlidesVisible(true);
+      return;
+            }
           }}
+          
         >
       <MaterialCommunityIcons name={item.icon} style={styles.icon} />
       <Text style={styles.title}>{item.connection === true ? "Conectado" : item.title} </Text>
@@ -69,7 +77,9 @@ return (
       selectedItem={selectedItem}
     />
 
-    <MenuModal visible={menuVisible} setVisible={setMenuVisible} />
+    <MenuModal visible={menuVisible} setVisible={setMenuVisible} typeMenu={typeMenu} setVisibleSlides={setSlidesVisible}/>
+
+    <ConnectionGuideModal visible={slidesVisible} setVisible={setSlidesVisible} />
   </View>
 );
 }
