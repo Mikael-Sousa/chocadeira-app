@@ -9,7 +9,7 @@ const wss = new WebSocketServer({ port: 8080 });
 const clientes = new Map<WebSocket, Cliente>();
 
 //tests
-/* function onDataFake() {
+function onDataFake() {
   return {
     temp_ar: Number((36 + Math.random() * 2).toFixed(2)),
     temp_agua: Number((37 + Math.random() * 1).toFixed(2)),
@@ -32,7 +32,7 @@ setInterval(() => {
   });
 
   console.log("Dados enviados:", payload);
-}, 5000); */
+}, 5000);
 
 
 wss.on("connection", (ws) => {

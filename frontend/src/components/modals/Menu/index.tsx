@@ -5,10 +5,13 @@ import { Text } from "@/src/components/ui";
 import { Modal, Pressable, View } from "react-native";
 import { createStyles } from "./styles";
 import { Props } from "./types";
+import { useWebSocket } from "@/src/contexts/websocket/useWebSocket";
 
-export default function MenuModal({ visible, setVisible, typeMenu, setVisibleSlides }: Props) {
+export default function MenuModal({ visible, setVisible, typeMenu, setVisibleSlides, connected }: Props) {
   const { theme, toggleTheme } = useTheme();
   const styles = createStyles(theme);
+
+  const { disconnect, connect } = useWebSocket();
 
   function renderContent() {
     switch (typeMenu) {
@@ -46,13 +49,26 @@ export default function MenuModal({ visible, setVisible, typeMenu, setVisibleSli
           <>
             <Text style={styles.modalTitle}>{typeMenu}</Text>
             <Pressable
-              style={[styles.menuItem, { backgroundColor: "#08ff10" }]}
+              style={[
+                styles.menuItem,
+                {
+                  backgroundColor: connected === true ? "#ff0808" : "#08ff10",
+                },
+              ]}
+
               onPress={() => {
-                setVisible(false);
+                if (connected) {
+                  disconnect()
+                  setVisible(false);
+                }
+                else {
+                  connect()
+                  setVisible(false)
+                }
               }}
             >
               <MaterialCommunityIcons name="wifi-check" style={styles.icon} />
-              <Text style={styles.menuText}>Conectar</Text>
+              <Text style={styles.menuText}>{connected === true ? "Desconectar" : "Conectar"}</Text>
 
             </Pressable>
             <Pressable

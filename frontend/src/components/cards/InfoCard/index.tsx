@@ -22,64 +22,77 @@ export default function InfoCard({ data, showModal, title, showMenu, situations,
     <>
       {data.map((item, index) => (
         <Pressable
-            style = {
-              [
+          style={
+            [
               styles.content,
-              situations?.[index] === "red" && { backgroundColor: "tomato" },
-              situations?.[index] === "blue" && { backgroundColor: "skyblue" },
-              item.connection === true && { backgroundColor: "#32CD32" }
-              ]}
+              situations?.[index] === "red" && { backgroundColor: "#ff0808" },
+              situations?.[index] === "blue" && { backgroundColor: "#0898ff" },
+              item.connection === true && { backgroundColor: "#08ff10" },
+              item.connection === false && { backgroundColor: "#ff0808" },
+            ]}
 
 
-          key = { index }
-          onPress = {() => {
+          key={index}
+          onPress={() => {
             if (showModal) {
-        setSelectedItem(index);
-      setVisible(true);
-      return;
+              setSelectedItem(index);
+              setVisible(true);
+              return;
             }
 
-      if (showMenu) {
-        setMenuVisible(true);
-      return;
+            if (showMenu) {
+              setMenuVisible(true);
+              return;
             }
 
             if (showSlides) {
-      setSlidesVisible(true);
-      return;
+              setSlidesVisible(true);
+              return;
             }
           }}
-          
+
         >
-      <MaterialCommunityIcons name={item.icon} style={styles.icon} />
-      <Text style={styles.title}>{item.connection === true ? "Conectado" : item.title} </Text>
-      <Text style={styles.status}>{item.status}</Text>
-    </Pressable>
+          <MaterialCommunityIcons name={item.icon} style={styles.icon} />
+          <Text style={styles.title}>
+            {item.title === "Wi-Fi"
+              ? item.connection === true
+                ? "Conectado"
+                : "Desconectado"
+              : item.title}
+          </Text>
+
+          <Text style={styles.status}>{item.status}</Text>
+        </Pressable>
       ))
-}
+      }
     </>
   );
 
-return (
-  <View style={[styles.container, { flex: 1 }]}>
-    <Text style={styles.title}>{title}</Text>
+  return (
+    <View style={[styles.container, { flex: 1 }]}>
+      <Text style={styles.title}>{title}</Text>
 
-    {data.length >= 4 ? (
-      <ScrollView contentContainerStyle={{ paddingBottom: 60 }}>{contentList}</ScrollView>
-    ) : (
-      <>{contentList}</>
-    )}
+      {data.length >= 4 ? (
+        <ScrollView contentContainerStyle={{ paddingBottom: 60 }}>{contentList}</ScrollView>
+      ) : (
+        <>{contentList}</>
+      )}
 
-    <AppModal
-      visible={visible}
-      setVisible={setVisible}
-      data={data}
-      selectedItem={selectedItem}
-    />
+      <AppModal
+        visible={visible}
+        setVisible={setVisible}
+        data={data}
+        selectedItem={selectedItem}
+      />
 
-    <MenuModal visible={menuVisible} setVisible={setMenuVisible} typeMenu={typeMenu} setVisibleSlides={setSlidesVisible}/>
+      <MenuModal
+        visible={menuVisible}
+        setVisible={setMenuVisible}
+        typeMenu={typeMenu}
+        setVisibleSlides={setSlidesVisible}
+        connected={data[0].connection} />
 
-    <ConnectionGuideModal visible={slidesVisible} setVisible={setSlidesVisible} />
-  </View>
-);
+      <ConnectionGuideModal visible={slidesVisible} setVisible={setSlidesVisible} />
+    </View>
+  );
 }

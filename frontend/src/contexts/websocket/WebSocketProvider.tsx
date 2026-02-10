@@ -10,27 +10,44 @@ export function WebSocketProvider({ children }: { children: React.ReactNode }) {
   const [connected, setConnected] = useState(false);
   const [sensorData, setSensorData] = useState<SensorData>({});
   const [history, setHistory] = useState<number[][]>([
-    [0, 0, 0, 0, 0, 0, 0, 0, 0,0],
-    [0, 0, 0, 0, 0, 0, 0, 0, 0,0],
-    [0, 0, 0, 0, 0, 0, 0, 0, 0,0],
+    [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+    [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+    [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
   ]);
 
+  const createSocket = () => {
+  socketRef.current = connectStatusSocket({
+    onOpen: () => setConnected(true),
+    onClose: () => setConnected(false),
+    onError: () => setConnected(false),
+    onData: (d) => {
+      setSensorData(d);
+      setHistory((prev) => updateHistory(prev, d));
+    },
+    onAlert: (msg) => Alert.alert("Alerta do sistema", msg),
+  });
+};
+
+
+  const connect = () => {
+  if (socketRef.current) return; // já conectado
+  createSocket();
+};
+
+
+  const disconnect = () => {
+    socketRef.current?.close();
+    socketRef.current = null;
+  };
+
   useEffect(() => {
-    socketRef.current = connectStatusSocket({
-      onOpen: () => setConnected(true),
-      onClose: () => setConnected(false),
-      onError: () => setConnected(false),
-      onData: (d) => {
-        setSensorData(d);
-        setHistory((prev) => updateHistory(prev, d));
-      },
-      onAlert: (msg) => Alert.alert("Alerta do sistema", msg),
-    });
+    createSocket();
 
     return () => {
       socketRef.current?.close();
     };
   }, []);
+
 
   return (
     <WebSocketContext.Provider
@@ -38,6 +55,8 @@ export function WebSocketProvider({ children }: { children: React.ReactNode }) {
         connected,
         sensorData,
         history,
+        connect,
+        disconnect,
       }}
     >
       {children}
