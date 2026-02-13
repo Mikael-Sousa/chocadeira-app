@@ -30,7 +30,7 @@ export function WebSocketProvider({ children }: { children: React.ReactNode }) {
 
 
   const connect = () => {
-  if (socketRef.current) return; // já conectado
+  if (socketRef.current) return;
   createSocket();
 };
 

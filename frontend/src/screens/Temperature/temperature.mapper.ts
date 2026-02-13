@@ -34,10 +34,30 @@ export function mapTemperatureItems(data: SensorData): Item[] {
 }
 
 export function mapSituations(history: number[][]) {
-  return history.map((row) => {
-    const v = row[4];
-    if (v > 42) return "red";
-    if (v < 32) return "blue";
+  return history.map((row, index) => {
+    const lastValue = row[row.length - 1];
+
+    if (index === 0) {
+      // umidade
+      if (lastValue > 55) return "red";
+      if (lastValue < 50) return "blue";
+      return "ok";
+    }
+
+    if (index === 1) {
+      // temp água
+      if (lastValue > 39) return "red";
+      if (lastValue < 38) return "blue";
+      return "ok";
+    }
+
+    if (index === 2) {
+      // temp ar
+      if (lastValue > 37.9) return "red";
+      if (lastValue < 37.6) return "blue";
+      return "ok";
+    }
+
     return "ok";
   });
 }

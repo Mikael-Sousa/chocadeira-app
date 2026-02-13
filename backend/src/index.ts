@@ -11,9 +11,9 @@ const clientes = new Map<WebSocket, Cliente>();
 //tests
 function onDataFake() {
   return {
-    temp_ar: Number((36 + Math.random() * 2).toFixed(2)),
-    temp_agua: Number((37 + Math.random() * 1).toFixed(2)),
-    umidade_1: Math.floor(50 + Math.random() * 10),
+    temp_ar: Number((37.7 + Math.random() * 0.2).toFixed(2)),
+    temp_agua: Number((38.4 + Math.random() * 0.2).toFixed(2)),
+    umidade_1: Math.floor(51 + Math.random() * 3),
     timestamp: Date.now(),
   };
 }
