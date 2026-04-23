@@ -1,7 +1,7 @@
 import WebSocket from "ws";
 
-type Client = {
+export type Client = {
   deviceId: string;
 };
 
-export const clients = new Map<WebSocket, Client>();
+export const clients: Map<WebSocket, Client> = new Map<WebSocket, Client>();

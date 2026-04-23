@@ -1,5 +1,5 @@
 //tests
-import WebSocket from "ws"
+import { WebSocket, WebSocketServer } from "ws"
 
 function onDataFake() {
   return {
@@ -10,7 +10,7 @@ function onDataFake() {
   };
 }
 
-export function simulator(wss: any, port: any) {
+export function simulator(wss: WebSocketServer, port: number) {
   console.log("incoming connection");
   setInterval(() => {
     const payload = onDataFake();

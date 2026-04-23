@@ -1,14 +1,14 @@
-const prompt = require('prompt-sync')();
-
-import { WebSocketServer } from "ws";
+import { WebSocketServer, RawData } from "ws";
 import { messageHandler } from "../handlers/messageHandler";
 import { clients } from "../clients/clientManager";
 import { simulator } from "../services/simulator";
 
+const prompt = require('prompt-sync')();
+
 const port = 8080
 const wss = new WebSocketServer({ port });
 
-const res = prompt('Is it a simulation? y/n: ');
+const res = prompt('Is it a simulation? y/n: ') as "y" | "n";
 
 if (res === "y") {
   simulator(wss, port)
@@ -20,7 +20,7 @@ function startNormalMode(wss: WebSocketServer) {
   wss.on("connection", (ws) => {
     console.log("incoming connection");
 
-    ws.on("message", (msg) => {
+    ws.on("message", (msg: RawData) => {
       messageHandler(ws, msg);
     });
 
