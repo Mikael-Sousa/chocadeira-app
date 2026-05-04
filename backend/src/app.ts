@@ -1,17 +1,17 @@
-const http = require("http");
-const { WebSocketServer } = require("ws");
-const expressApp = require("./transports/http/app");
-const { setupWS } = require("./transports/websocket");
-const { simulator } = require("./transports/websocket/services/simulator");
+import http from "http";
+import { WebSocketServer } from "ws";
+import app from "./transports/http/app";
+import { setupWS } from "./transports/websocket";
+import { simulator } from "./transports/websocket/services/simulator";
 
 const prompt = require("prompt-sync")();
 
 const PORT = 4000;
 
-//cria servidor HTTP
-const server = http.createServer(expressApp);
+// cria servidor HTTP
+const server = http.createServer(app);
 
-//pluga WebSocket no mesmo server
+// pluga WebSocket no mesmo server
 const wss = new WebSocketServer({ server });
 
 setupWS(wss);
