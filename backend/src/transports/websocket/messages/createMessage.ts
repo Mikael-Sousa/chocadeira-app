@@ -1,6 +1,8 @@
+import { DataMessage } from "../types/messages.types";
+
 export type Message =
     | { type: "CONNECT"; deviceId: string; payload: null }
-    | { type: "DATA"; deviceId: string; payload: { value: number } }
+    | DataMessage
     | { type: "DISCONNECT"; deviceId: string; payload: null };
 
 export function createMessage<T extends Message>(

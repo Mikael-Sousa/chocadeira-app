@@ -1,12 +1,27 @@
 //tests
 import { WebSocket, WebSocketServer } from "ws"
 
+function futureDate(days: number) {
+  const date = new Date();
+  date.setDate(date.getDate() + days);
+  return date.toISOString();
+}
+
 function onDataFake() {
   return {
-    temp_ar: Number((37.7 + Math.random() * 0.2).toFixed(2)),
-    temp_agua: Number((38.4 + Math.random() * 0.2).toFixed(2)),
-    umidade_1: Math.floor(51 + Math.random() * 3),
-    timestamp: Date.now(),
+    telemetry: {
+      water_temperature: Number((37.7 + Math.random() * 0.2).toFixed(2)),
+      air_temperature: Number((38.4 + Math.random() * 0.2).toFixed(2)),
+      humidity: Math.floor(51 + Math.random() * 3),
+      timestamp: Date.now(),
+    },
+    status: {
+      uptime: Math.floor(process.uptime()),
+      time_to_hatch: 20 * 24 * 60 * 60, 
+      daily_rotations: 6,
+      is_door_open: Math.random() > 0.8,
+      expected_hatch_date: futureDate(20)
+    }
   };
 }
 
