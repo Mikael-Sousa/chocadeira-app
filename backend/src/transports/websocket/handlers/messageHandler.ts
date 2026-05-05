@@ -2,22 +2,39 @@ import { WebSocket, RawData } from "ws";
 import { clients } from "../clients/clientManager";
 import { createMessage } from "../messages/createMessage";
 import { broadcast } from "../utils/broadcast";
+import deviceService from "../../../modules/device/device.service";
 
-export function messageHandler(ws: WebSocket, msg: RawData): void {
+export async function messageHandler(ws: WebSocket, msg: RawData): Promise<void> {
   let data;
+
   try {
     data = JSON.parse(msg.toString());
   } catch {
     return;
   }
 
-  if (data.deviceId) {
-    clients.set(ws, { deviceId: data.deviceId });
-    console.log("Registered:", data.deviceId);
+  if (data.type === "auth") {
+    try {
+      const result = await deviceService.authenticateDevice(data.espId);
+
+      if (result.status === 401) {
+        await deviceService.register(data.espId);
+      }
+
+       clients.set(ws, { deviceId: data.espId });
+
+      console.log("Authenticated:", data.espId);
+
+    } catch (err) {
+      console.error("Auth error:", err);
+      ws.close();
+    }
+
     return;
   }
 
   const client = clients.get(ws);
+
   if (!client) {
     console.log("Unregistered customer");
     return;
@@ -29,6 +46,7 @@ export function messageHandler(ws: WebSocket, msg: RawData): void {
     type: "DATA",
     deviceId: client.deviceId,
     payload: data
-  })
-  broadcast(clients, message)
+  });
+
+  broadcast(clients, message);
 }
