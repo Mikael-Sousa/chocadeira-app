@@ -1,4 +1,4 @@
-import jwt from "jsonwebtoken"
+const jwt = require("jsonwebtoken");
 
 const authMiddleware = (req: any, res: any, next: () => void) => {
   const authHeader = req.headers.authorization;
@@ -12,8 +12,8 @@ const authMiddleware = (req: any, res: any, next: () => void) => {
   try {
     const decoded = jwt.verify(token, process.env.JWT_SECRET!);
 
-    req.user = {
-      id: decoded
+    req.device = {
+      id: decoded.id,
     };
 
     next();
@@ -22,4 +22,4 @@ const authMiddleware = (req: any, res: any, next: () => void) => {
   }
 };
 
-export default authMiddleware;
+module.exports = authMiddleware;

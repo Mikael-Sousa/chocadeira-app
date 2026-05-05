@@ -46,7 +46,9 @@ const login = async (email: string, password: string) => {
       email: user.email,
     }
 
-  const token = jwt.sign(payload, process.env.JWT_SECRET!);
+  const token = jwt.sign(payload, process.env.JWT_SECRET!, {
+    expiresIn: "7d",
+  });
 
   return {
     status: 200,
