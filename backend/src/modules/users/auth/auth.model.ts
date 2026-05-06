@@ -1,4 +1,4 @@
-import db from "../../shared/database/connection"
+import db from "../../../shared/database/connection"
 
 const findByEmail = async (email: string) => {
     const result = await db.query(
@@ -16,7 +16,7 @@ const registerNewUser = async (
     const result = await db.query(
         "INSERT INTO users (name, email, password) VALUES ($1, $2, $3) RETURNING id",
         [name, email, password]);
-    return { insertId: result.rows[0].insertId }
+    return { insertId: result.rows[0].id }
 }
 
 export default {

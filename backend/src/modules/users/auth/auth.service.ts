@@ -1,4 +1,5 @@
 import authModel from "./auth.model"
+import settingsService from "../settings/settings.service";
 import bcrypt from "bcrypt"
 import jwt from "jsonwebtoken"
 import "dotenv/config";
@@ -21,6 +22,8 @@ const register = async (
     email,
     hashedPassword,
   );
+
+  await settingsService.createSettings(newUser.insertId)
 
   return {
     status: 201,

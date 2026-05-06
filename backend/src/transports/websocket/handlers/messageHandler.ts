@@ -2,7 +2,7 @@ import { WebSocket, RawData } from "ws";
 import { clients } from "../clients/clientManager";
 import { createMessage } from "../messages/createMessage";
 import { broadcast } from "../utils/broadcast";
-import deviceService from "../../../modules/device/device.service";
+import deviceService from "../../../modules/device/device.service"
 import { IncomingMessage } from "../types/messages.types";
 
 export async function messageHandler(ws: WebSocket, msg: RawData): Promise<void> {
