@@ -1,5 +1,5 @@
 import { createContext } from "react";
-import { SensorData } from "@/src/screens/Temperature/temperature.types";
+import { SensorData } from "@/src/types/data";
 
 export type WebSocketContextData = {
   connected: boolean;

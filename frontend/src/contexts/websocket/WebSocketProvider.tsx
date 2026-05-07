@@ -2,13 +2,27 @@ import { useEffect, useRef, useState } from "react";
 import { Alert } from "react-native";
 import { WebSocketContext } from "./WebSocketContext";
 import { connectStatusSocket } from "@/src/services/websocket";
-import { SensorData } from "@/src/screens/Temperature/temperature.types";
+import { SensorData } from "@/src/types/data";
 
 export function WebSocketProvider({ children }: { children: React.ReactNode }) {
   const socketRef = useRef<WebSocket | null>(null);
 
   const [connected, setConnected] = useState(false);
-  const [sensorData, setSensorData] = useState<SensorData>({});
+  const [sensorData, setSensorData] = useState<SensorData>({
+  telemetry: {
+    water_temperature: 0,
+    air_temperature: 0,
+    humidity: 0,
+    timestamp: ""
+  },
+  status: {
+    uptime: 0,
+    time_to_hatch: 0,
+    daily_rotations: 0,
+    is_door_open: false,
+    expected_hatch_date: ""
+  }
+});
   const [history, setHistory] = useState<number[][]>([
     [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
     [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
@@ -67,14 +81,14 @@ export function WebSocketProvider({ children }: { children: React.ReactNode }) {
 function updateHistory(prev: number[][], d: SensorData) {
   const next = [...prev];
 
-  if (d.umidade_1 !== undefined)
-    next[0] = [...next[0].slice(1), d.umidade_1];
+  if (d.telemetry.humidity !== undefined)
+    next[0] = [...next[0].slice(1), d.telemetry.humidity];
 
-  if (d.temp_agua !== undefined)
-    next[1] = [...next[1].slice(1), d.temp_agua];
+  if (d.telemetry.water_temperature !== undefined)
+    next[1] = [...next[1].slice(1), d.telemetry.water_temperature];
 
-  if (d.temp_ar !== undefined)
-    next[2] = [...next[2].slice(1), d.temp_ar];
+  if (d.telemetry.air_temperature !== undefined)
+    next[2] = [...next[2].slice(1), d.telemetry.air_temperature];
 
   return next;
 }

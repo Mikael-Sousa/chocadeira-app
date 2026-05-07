@@ -1,5 +1,5 @@
 import { Item } from "@/src/components/cards/InfoCard/types";
-import { SensorData } from "./temperature.types";
+import { SensorData } from "@/src/types/data";
 
 export function mapTemperatureItems(data: SensorData): Item[] {
   return [
@@ -7,28 +7,25 @@ export function mapTemperatureItems(data: SensorData): Item[] {
       icon: "thermometer",
       title: "Umidade",
       status:
-        data.umidade_1 === undefined
+        data.telemetry.humidity === undefined
           ? "--"
-          : `${data.umidade_1.toFixed(1)} %`,
-      hiddenStatus: "",
+          : `${data.telemetry.humidity.toFixed(1)} %`,
     },
     {
       icon: "water",
       title: "Temp. da Água",
       status:
-        data.temp_agua === undefined
+        data.telemetry.water_temperature === undefined
           ? "--"
-          : `${data.temp_agua.toFixed(1)} °C`,
-      hiddenStatus: "",
+          : `${data.telemetry.water_temperature.toFixed(1)} °C`,
     },
     {
       icon: "weather-windy",
       title: "Temp. do Ar",
       status:
-        data.temp_ar === undefined
+        data.telemetry.air_temperature === undefined
           ? "--"
-          : `${data.temp_ar.toFixed(1)} °C`,
-      hiddenStatus: "",
+          : `${data.telemetry.air_temperature.toFixed(1)} °C`,
     },
   ];
 }

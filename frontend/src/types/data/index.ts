@@ -1,8 +1,3 @@
-export type AuthMessage = {
-  type: "auth";
-  deviceId: string;
-};
-
 type Telemetry = {
   water_temperature: number;
   air_temperature: number;
@@ -18,15 +13,7 @@ type DeviceStatus = {
   expected_hatch_date: string;
 };
 
-export type DataMessage = {
-  type: "DATA";
-  device_id: string;
-  payload: {
-    telemetry: Telemetry;
-    status: DeviceStatus;
-  };
+export type SensorData = {
+  telemetry: Telemetry;
+  status: DeviceStatus;
 };
-
-export type IncomingMessage =
-  | AuthMessage
-  | DataMessage;

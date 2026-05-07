@@ -13,7 +13,7 @@ export function connectStatusSocket({
   onData,
   onAlert,
 }: Callbacks) {
-  const ws = new WebSocket("ws://10.18.71.82:8080");
+  const ws = new WebSocket("http://localhost:4000");
 
   ws.onopen = () => {
     onOpen?.();
