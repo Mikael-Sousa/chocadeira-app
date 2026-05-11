@@ -6,8 +6,13 @@ import { Modal, Pressable, View } from "react-native";
 import { createStyles } from "./styles";
 import { Props } from "./types";
 
-export default function AppModal({ visible, setVisible, data, selectedItem }: Props) {
-  const { theme } = useTheme(); 
+export default function AppModal({
+  visible,
+  setVisible,
+  data,
+  selectedItem,
+}: Props) {
+  const { theme } = useTheme();
   const styles = createStyles(theme);
 
   return (
@@ -20,9 +25,28 @@ export default function AppModal({ visible, setVisible, data, selectedItem }: Pr
       >
         <View style={styles.overlay}>
           <View style={styles.modalView}>
-            <Text style={styles.modalTitle}>{data[selectedItem].title}</Text>
-            <Text style={styles.modalValue}>{data[selectedItem].hiddenStatus}</Text>
-            <Pressable style={styles.closeButton} onPress={() => setVisible(false)}>
+
+            <View style={styles.headerIconContainer}>
+              <Ionicons
+                name="information-circle-outline"
+                style={styles.headerIcon}
+              />
+            </View>
+
+            <Text style={styles.modalTitle}>
+              {data[selectedItem].title}
+            </Text>
+
+            <View style={styles.valueContainer}>
+              <Text style={styles.modalValue}>
+                {data[selectedItem].hiddenStatus}
+              </Text>
+            </View>
+
+            <Pressable
+              style={styles.closeButton}
+              onPress={() => setVisible(false)}
+            >
               <Ionicons name="close" style={styles.icon} />
             </Pressable>
           </View>

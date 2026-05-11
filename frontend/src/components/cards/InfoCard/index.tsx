@@ -6,13 +6,15 @@ import { Text } from "@/src/components/ui";
 import ConnectionGuideModal from "../../modals/Slides";
 import MenuModal from "../../modals/Menu";
 import AppModal from "../../modals/Modal";
+import HistoryModal from "../../modals/History";
 import { createStyles } from "./styles";
 import { Props } from "./types";
 
-export default function InfoCard({ data, showModal, title, showMenu, situations, showSlides, typeMenu }: Props) {
+export default function InfoCard({ data, showModal, title, showMenu, situations, showSlides, typeMenu, showHistory }: Props) {
   const [visible, setVisible] = useState(false);
   const [menuVisible, setMenuVisible] = useState(false);
   const [slidesVisible, setSlidesVisible] = useState(false)
+  const [historyVisible, setHistoryVisible] = useState(false)
   const [selectedItem, setSelectedItem] = useState<number>(0);
 
   const { theme } = useTheme();
@@ -34,14 +36,20 @@ export default function InfoCard({ data, showModal, title, showMenu, situations,
 
           key={index}
           onPress={() => {
+            setSelectedItem(index);
+
             if (showModal) {
-              setSelectedItem(index);
               setVisible(true);
               return;
             }
 
             if (showMenu) {
               setMenuVisible(true);
+              return;
+            }
+
+            if (showHistory) {
+              setHistoryVisible(true);
               return;
             }
 
@@ -88,11 +96,17 @@ export default function InfoCard({ data, showModal, title, showMenu, situations,
       <MenuModal
         visible={menuVisible}
         setVisible={setMenuVisible}
-        typeMenu={typeMenu}
+        typeMenu={typeMenu?.[selectedItem]}
         setVisibleSlides={setSlidesVisible}
         connected={data[0].connection} />
 
       <ConnectionGuideModal visible={slidesVisible} setVisible={setSlidesVisible} />
+
+      <HistoryModal
+        visible={historyVisible}
+        setVisible={setHistoryVisible}
+
+      />
     </View>
   );
 }

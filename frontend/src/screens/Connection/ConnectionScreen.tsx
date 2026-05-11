@@ -14,7 +14,7 @@ export function ConnectionScreen() {
       <InfoHeader title="Chokedex" />
 
       <InfoCard
-        typeMenu={"wi-fi"}
+        typeMenu={["wi-fi"]}
         data={connections}
         title="Conexão"
         showMenu={true}
@@ -22,7 +22,6 @@ export function ConnectionScreen() {
 
       <InfoCard
         data={lastConnection}
-        showModal={true}
         title="Última conexão"
         situations={[]}
       />

@@ -17,8 +17,6 @@ export function useConnection(connected: boolean) {
     {
       icon: "view-dashboard-outline",
       title: "204.225-70",
-      hiddenStatus: "02:00 hrs",
-      status: "",
     },
   ];
 

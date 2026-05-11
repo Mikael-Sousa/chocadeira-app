@@ -12,7 +12,11 @@ export function SettingsScreen() {
     <SafeAreaView style={styles.container} edges={[]}>
       <View style={styles.content}>
         <InfoHeader icon="cog" title="Configurações" />
-        <InfoCard typeMenu={"tema"} data={settings} showMenu={true} />
+        <InfoCard
+          typeMenu={settings.map(item => item.title)}
+          data={settings}
+          showMenu={true}
+        />
       </View>
     </SafeAreaView>
   );
