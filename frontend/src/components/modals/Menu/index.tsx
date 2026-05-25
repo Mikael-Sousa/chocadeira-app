@@ -1,7 +1,7 @@
 import { Modal, Pressable, View } from "react-native";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
 
-import { useTheme } from "@/src/theme/useTheme";
+import { useTheme } from "@/src/hooks/theme/useTheme";
 import { createStyles } from "./styles";
 
 import ThemeSection from "./sections/ThemeSection";

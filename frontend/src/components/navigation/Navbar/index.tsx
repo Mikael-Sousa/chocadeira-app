@@ -3,20 +3,10 @@ import { Href, useRouter } from "expo-router";
 import React from "react";
 import { Pressable, View } from "react-native";
 import { createStyles } from "./styles";
+import { useTheme } from "@/src/hooks/theme/useTheme";
 
-type Theme = {
-  primary: string;
-  secondary: string;
-  backgroundMain: string;
-  background: string;
-};
-
-type Props = {
-  theme: Theme;
-  toggleTheme: () => void;
-};
-
-export default function Navbar({ theme, toggleTheme }: Props) {
+export default function Navbar() {
+  const { theme } = useTheme();
   const router = useRouter();
   const styles = createStyles(theme);
 

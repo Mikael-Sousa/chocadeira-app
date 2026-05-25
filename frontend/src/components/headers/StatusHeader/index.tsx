@@ -1,4 +1,4 @@
-import { useTheme } from "@/src/theme/useTheme";
+import { useTheme } from "@/src/hooks/theme/useTheme";
 import * as SystemUI from "expo-system-ui";
 import { useEffect } from "react";
 import { Text } from "@/src/components/ui";

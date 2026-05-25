@@ -4,14 +4,19 @@ import { Pressable, View } from "react-native";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
 
 import { Text } from "@/src/components/ui";
-import { useTheme } from "@/src/theme/useTheme";
+import { useTheme } from "@/src/hooks/theme/useTheme";
 
 import { createStyles } from "../styles";
+
+import { useAuth } from "@/src/contexts/auth/AuthContext";
+
 
 export default function AccountSection() {
 
   const { theme } = useTheme();
   const styles = createStyles(theme);
+
+  const { user, logout } = useAuth();
 
   return (
     <>
@@ -31,51 +36,21 @@ export default function AccountSection() {
           </View>
 
           <Text style={styles.accountName}>
-            Administrador
+            {user?.name}
           </Text>
 
           <Text style={styles.accountEmail}>
-            incubadora@ifpi.edu.br
+            {user?.email}
           </Text>
 
         </View>
 
         <View style={styles.accountButtonsContainer}>
 
-          <Pressable style={styles.accountButton}>
-            <MaterialCommunityIcons
-              name="account-edit"
-              style={styles.accountButtonIcon}
-            />
-
-            <Text style={styles.accountButtonText}>
-              Editar Perfil
-            </Text>
-          </Pressable>
-
-          <Pressable style={styles.accountButton}>
-            <MaterialCommunityIcons
-              name="shield-check"
-              style={styles.accountButtonIcon}
-            />
-
-            <Text style={styles.accountButtonText}>
-              Segurança
-            </Text>
-          </Pressable>
-
-          <Pressable style={styles.accountButton}>
-            <MaterialCommunityIcons
-              name="history"
-              style={styles.accountButtonIcon}
-            />
-
-            <Text style={styles.accountButtonText}>
-              Histórico
-            </Text>
-          </Pressable>
-
-          <Pressable style={styles.logoutButton}>
+          <Pressable 
+          style={styles.logoutButton}
+          onPress={() => logout()}
+          >
             <MaterialCommunityIcons
               name="logout"
               style={styles.logoutIcon}

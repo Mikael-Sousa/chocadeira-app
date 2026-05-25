@@ -26,7 +26,21 @@ const login = async (req: any, res: any) => {
   }
 };
 
+const getMe = async (req: any, res: any) => {
+    try {
+        const userId = req.user.id;
+        const result = await authService.getProfileByUserId(userId);
+        return res.status(result.status).json(result)
+
+    } catch (err: any) {
+        console.error(err);
+        return res.status(500).json({ message: "Internal server error" });
+    }
+};
+
+
 export default {
   register,
   login,
+  getMe
 };

@@ -1,4 +1,4 @@
-import { useTheme } from "@/src/theme/useTheme";
+import { useTheme } from "@/src/hooks/theme/useTheme";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
 import React, { useState } from "react";
 import { Pressable, ScrollView, View } from "react-native";

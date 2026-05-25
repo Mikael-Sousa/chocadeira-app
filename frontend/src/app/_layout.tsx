@@ -1,10 +1,11 @@
-import { Slot } from "expo-router";
+import { Slot, Stack } from "expo-router";
 import { createContext, useState } from "react";
 import { View } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { useFonts } from "expo-font";
 import Navbar from "../components/navigation/Navbar";
 import { WebSocketProvider } from "@/src/contexts/websocket/WebSocketProvider";
+import { AuthProvider } from "@/src/contexts/auth/AuthContext";
 
 type ThemeType = {
   primary: string;
@@ -52,15 +53,13 @@ export default function Layout() {
 
   return (
     <ThemeContext.Provider value={{ theme, toggleTheme }}>
-      <WebSocketProvider>
-        <SafeAreaView style={{ flex: 1, backgroundColor: theme.backgroundMain }}>
-          <View style={{ flex: 1 }}>
+      <AuthProvider>
+        <WebSocketProvider>
+          <SafeAreaView style={{ flex: 1 }}>
             <Slot />
-          </View>
-
-          <Navbar theme={theme} toggleTheme={toggleTheme} />
-        </SafeAreaView>
-      </WebSocketProvider>
+          </SafeAreaView>
+        </WebSocketProvider>
+      </AuthProvider>
     </ThemeContext.Provider>
   );
 }

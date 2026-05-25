@@ -8,18 +8,41 @@ const findByEmail = async (email: string) => {
     return result.rows[0] || null
 };
 
+const findProfileByUserId = async (userId: number) => {
+    const result = await db.query(
+        `
+    SELECT 
+      id,
+      name,
+      email
+    FROM users
+    WHERE id = $1
+    `,
+        [userId]
+    );
+
+    return result.rows[0] || null;
+};
+
 const registerNewUser = async (
     name: string,
     email: string,
     password: string
 ) => {
     const result = await db.query(
-        "INSERT INTO users (name, email, password) VALUES ($1, $2, $3) RETURNING id",
-        [name, email, password]);
-    return { insertId: result.rows[0].id }
-}
+        `
+    INSERT INTO users (name, email, password)
+    VALUES ($1, $2, $3)
+    RETURNING id, name, email, password
+    `,
+        [name, email, password]
+    );
+
+    return result.rows[0] || null;
+};
 
 export default {
     findByEmail,
-    registerNewUser
+    findProfileByUserId,
+    registerNewUser,
 };

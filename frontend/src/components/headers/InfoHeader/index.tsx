@@ -1,4 +1,4 @@
-import { useTheme } from "@/src/theme/useTheme";
+import { useTheme } from "@/src/hooks/theme/useTheme";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
 import { Text } from "@/src/components/ui";
 import { View } from "react-native";

@@ -4,7 +4,7 @@ import { Pressable } from "react-native";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
 
 import { Text } from "@/src/components/ui";
-import { useTheme } from "@/src/theme/useTheme";
+import { useTheme } from "@/src/hooks/theme/useTheme";
 
 import { useWebSocket } from "@/src/contexts/websocket/useWebSocket";
 

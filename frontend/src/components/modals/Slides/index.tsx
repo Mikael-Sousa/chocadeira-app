@@ -9,7 +9,7 @@ import { MaterialCommunityIcons } from "@expo/vector-icons";
 import { connectionSteps } from "./steps";
 import { Text } from "@/src/components/ui";
 import ArrowButton from "../../buttons/ArrowButton";
-import { useTheme } from "@/src/theme/useTheme";
+import { useTheme } from "@/src/hooks/theme/useTheme";
 import { createStyles } from "./styles";
 
 export interface Props {
