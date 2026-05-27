@@ -1,9 +1,9 @@
 import { Text as RNText, TextProps } from "react-native";
 import { useContext } from "react";
-import { ThemeContext } from "../../app/_layout"
+import { ThemeContext } from "@/src/contexts/theme/ThemeContext";
 
 export function AppText({ style, ...props }: TextProps) {
-    const { theme } = useContext(ThemeContext)!;
+  const { theme } = useContext(ThemeContext)!;
 
     return (
         <RNText
