@@ -8,6 +8,7 @@ import {
 } from "react-native";
 
 import { useTheme } from "@/src/hooks/theme/useTheme";
+import { colors } from "@/src/constants/colors";
 import Input from "@/src/components/inputs/Input";
 import { useAuth } from "@/src/contexts/auth/AuthContext";
 import { createStyles } from "./styles";
@@ -68,7 +69,7 @@ export default function LoginForm() {
         onPress={handleLogin}
       >
         {loading ? (
-          <ActivityIndicator color="#fff" />
+          <ActivityIndicator color={colors.white} />
         ) : (
           <Text style={styles.buttonText}>
             Entrar

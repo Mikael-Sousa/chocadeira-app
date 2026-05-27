@@ -5,6 +5,7 @@ import { MaterialCommunityIcons } from "@expo/vector-icons";
 
 import { Text } from "@/src/components/ui";
 import { useTheme } from "@/src/hooks/theme/useTheme";
+import { colors } from "@/src/constants/colors";
 
 import { useWebSocket } from "@/src/contexts/websocket/useWebSocket";
 
@@ -38,8 +39,8 @@ export default function WifiSection({
           styles.menuItem,
           {
             backgroundColor: connected
-              ? "#ff0808"
-              : "#08ff10",
+              ? colors.red
+              : colors.green,
           },
         ]}
         onPress={() => {

@@ -8,7 +8,7 @@ export const createStyles = (theme: any) =>
     container: {
       alignItems: "center",
       justifyContent: "center",
-      backgroundColor: theme.backgroundMain,
+      backgroundColor: theme.surface,
       marginVertical: 8,
       width: "60%",
       alignSelf: "center",

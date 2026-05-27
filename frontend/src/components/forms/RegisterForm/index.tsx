@@ -8,6 +8,7 @@ import {
 } from "react-native";
 
 import { useTheme } from "@/src/hooks/theme/useTheme";
+import { colors } from "@/src/constants/colors";
 import Input from "@/src/components/inputs/Input";
 import { createStyles } from "./styles";
 import { useRouter } from "expo-router";
@@ -75,7 +76,7 @@ export default function RegisterForm() {
         onPress={handleLogin}
       >
         {loading ? (
-          <ActivityIndicator color="#fff" />
+          <ActivityIndicator color={colors.white} />
         ) : (
           <Text style={styles.buttonText}>
             Criar

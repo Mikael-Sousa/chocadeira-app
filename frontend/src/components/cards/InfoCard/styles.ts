@@ -4,13 +4,13 @@ import { StyleSheet } from "react-native";
 export function createStyles(theme: {
   primary: string;
   secondary: string;
-  backgroundMain: string;
+  surface: string;
   background: string;
 }) {
   return StyleSheet.create({
     container: {
       flex: 1,
-      backgroundColor: theme.backgroundMain,
+      backgroundColor: theme.surface,
       paddingHorizontal: 20,
       justifyContent: "space-between",
       width: "100%",

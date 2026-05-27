@@ -5,6 +5,7 @@ import { MaterialCommunityIcons } from "@expo/vector-icons";
 
 import { Text } from "@/src/components/ui";
 import { useTheme } from "@/src/hooks/theme/useTheme";
+import { colors } from "@/src/constants/colors";
 import { createStyles } from "../styles";
 
 type Props = {
@@ -27,7 +28,7 @@ export default function ThemeSection({
       <Pressable
         style={styles.menuItemLight}
         onPress={() => {
-          if (theme.backgroundMain === "#000") {
+          if (theme.surface === colors.black) {
             toggleTheme();
           }
 
@@ -47,7 +48,7 @@ export default function ThemeSection({
       <Pressable
         style={styles.menuItemDark}
         onPress={() => {
-          if (theme.backgroundMain === "#fff") {
+          if (theme.surface === colors.white) {
             toggleTheme();
           }
 

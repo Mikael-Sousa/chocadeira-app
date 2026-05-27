@@ -1,11 +1,14 @@
 import { createContext, ReactNode, useState } from "react";
 import { useFonts } from "expo-font";
+import { colors } from "@/src/constants/colors";
 
 type ThemeType = {
   primary: string;
   secondary: string;
-  backgroundMain: string;
   background: string;
+  surface: string;
+  card: string;
+  text: string;
   fontRegular: string;
 };
 
@@ -17,18 +20,22 @@ type ThemeContextProps = {
 export const ThemeContext = createContext<ThemeContextProps | null>(null);
 
 const light: ThemeType = {
-  primary: "#000",
-  secondary: "#555",
-  backgroundMain: "#fff",
-  background: "#f0f0f0",
+  primary: colors.black,
+  secondary: colors.gray500,
+  background: colors.gray100,
+  surface: colors.white,
+  card: colors.white,
+  text: colors.black,
   fontRegular: "Caprasimo-Regular",
 };
 
 const dark: ThemeType = {
-  primary: "#fff",
-  secondary: "#aaa",
-  backgroundMain: "#000",
-  background: "#111",
+  primary: colors.white,
+  secondary: colors.gray700,
+  background: colors.gray900,
+  surface: colors.black,
+  card: colors.black,
+  text: colors.white,
   fontRegular: "Caprasimo-Regular",
 };
 

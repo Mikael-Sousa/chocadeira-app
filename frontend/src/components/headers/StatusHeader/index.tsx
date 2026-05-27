@@ -19,7 +19,7 @@ export default function App({
   const styles = createStyles(theme);
 
   useEffect(() => {
-    SystemUI.setBackgroundColorAsync(theme.backgroundMain);
+    SystemUI.setBackgroundColorAsync(theme.surface);
   }, [theme]);
 
   const maxIndex = data.length - 1;

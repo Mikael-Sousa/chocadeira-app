@@ -1,4 +1,5 @@
 import { StyleSheet } from "react-native";
+import { colors } from "@/src/constants/colors";
 
 export function createStyles(theme: any) {
   return StyleSheet.create({
@@ -6,7 +7,7 @@ export function createStyles(theme: any) {
       flex: 1,
       justifyContent: "center",
       alignItems: "center",
-      backgroundColor: "rgba(0,0,0,0.55)",
+      backgroundColor: colors.overlayBlack55,
       paddingHorizontal: 20,
     },
 
@@ -47,26 +48,26 @@ export function createStyles(theme: any) {
       width: "100%",
       flexDirection: "row",
       alignItems: "center",
-      backgroundColor: "#fff",
+      backgroundColor: colors.white,
       paddingVertical: 14,
       paddingHorizontal: 14,
       borderRadius: 14,
       marginBottom: 12,
       borderWidth: 2,
-      borderColor: "#222",
+      borderColor: colors.darkGray,
     },
 
     menuItemDark: {
       width: "100%",
       flexDirection: "row",
       alignItems: "center",
-      backgroundColor: "#222",
+      backgroundColor: colors.darkGray,
       paddingVertical: 14,
       paddingHorizontal: 14,
       borderRadius: 14,
       marginBottom: 12,
       borderWidth: 2,
-      borderColor: "#fff",
+      borderColor: colors.white,
     },
 
     icon: {
@@ -84,13 +85,13 @@ export function createStyles(theme: any) {
     menuTextLight: {
       fontSize: 18,
       fontWeight: "600",
-      color: "#222",
+      color: colors.darkGray,
     },
 
     menuTextDark: {
       fontSize: 18,
       fontWeight: "600",
-      color: "#fff",
+      color: colors.white,
     },
 
     closeButton: {
@@ -198,18 +199,18 @@ export function createStyles(theme: any) {
       paddingVertical: 16,
       borderRadius: 18,
 
-      backgroundColor: "#ff3b30",
+      backgroundColor: colors.redAlert,
     },
 
     logoutIcon: {
       fontSize: 24,
-      color: "#fff",
+      color: colors.white,
     },
 
     logoutText: {
       fontSize: 16,
       fontWeight: "800",
-      color: "#fff",
+      color: colors.white,
     },
     aboutContainer: {
       width: "100%",
@@ -313,7 +314,7 @@ export function createStyles(theme: any) {
       borderRadius: 18,
       justifyContent: "center",
       alignItems: "center",
-      backgroundColor: "#e64d45",
+      backgroundColor: colors.danger,
     },
 
     notificationLowIcon: {
@@ -322,7 +323,7 @@ export function createStyles(theme: any) {
       borderRadius: 18,
       justifyContent: "center",
       alignItems: "center",
-      backgroundColor: "#359afe",
+      backgroundColor: colors.info,
     },
 
     notificationWarningIcon: {
@@ -331,7 +332,7 @@ export function createStyles(theme: any) {
       borderRadius: 18,
       justifyContent: "center",
       alignItems: "center",
-      backgroundColor: "#fca421",
+      backgroundColor: colors.warning,
     },
 
     notificationIcon: {

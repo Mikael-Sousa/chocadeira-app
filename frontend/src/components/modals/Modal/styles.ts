@@ -1,4 +1,5 @@
 import { StyleSheet } from "react-native";
+import { colors } from "@/src/constants/colors";
 
 export function createStyles(theme: any) {
   return StyleSheet.create({
@@ -8,7 +9,7 @@ export function createStyles(theme: any) {
 
     overlay: {
       flex: 1,
-      backgroundColor: "rgba(0,0,0,0.72)",
+      backgroundColor: colors.overlayBlack72,
       justifyContent: "center",
       alignItems: "center",
       paddingHorizontal: 24,
@@ -23,7 +24,7 @@ export function createStyles(theme: any) {
       paddingHorizontal: 26,
       alignItems: "center",
 
-      shadowColor: "#000",
+      shadowColor: colors.black,
       shadowOffset: {
         width: 0,
         height: 10,

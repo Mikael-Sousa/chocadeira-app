@@ -1,4 +1,5 @@
 import { StyleSheet } from "react-native";
+import { colors } from "@/src/constants/colors";
 
 export function createStyles(theme: any) {
   return StyleSheet.create({
@@ -6,7 +7,7 @@ export function createStyles(theme: any) {
       flex: 1,
       justifyContent: "center",
       alignItems: "center",
-      backgroundColor: "rgba(0,0,0,0.55)",
+      backgroundColor: colors.overlayBlack55,
       paddingHorizontal: 20,
     },
 
@@ -29,7 +30,7 @@ export function createStyles(theme: any) {
 
     historyCard: {
       width: "100%",
-      backgroundColor: theme.backgroundMain,
+      backgroundColor: theme.surface,
       borderRadius: 24,
       padding: 18,
 

@@ -1,17 +1,18 @@
 import { StyleSheet } from "react-native";
+import { colors } from "@/src/constants/colors";
 
 export function createStyles(theme: any) {
   return StyleSheet.create({
     overlay: {
       flex: 1,
-      backgroundColor: "rgba(0,0,0,0.6)",
+      backgroundColor: colors.overlayBlack60,
       justifyContent: "center",
       alignItems: "center",
     },
 
     modalView: {
       width: "90%",
-      backgroundColor: theme.backgroundMain,
+      backgroundColor: theme.surface,
       borderRadius: 16,
       padding: 20,
       alignItems: "center",

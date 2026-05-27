@@ -3,6 +3,7 @@ import { MaterialCommunityIcons } from "@expo/vector-icons";
 import React, { useState } from "react";
 import { Pressable, ScrollView, View } from "react-native";
 import { Text } from "@/src/components/ui";
+import { colors } from "@/src/constants/colors";
 import ConnectionGuideModal from "../../modals/Slides";
 import MenuModal from "../../modals/Menu";
 import AppModal from "../../modals/Modal";
@@ -27,10 +28,10 @@ export default function InfoCard({ data, showModal, title, showMenu, situations,
           style={
             [
               styles.content,
-              situations?.[index] === "red" && { backgroundColor: "#ff0808" },
-              situations?.[index] === "blue" && { backgroundColor: "#0898ff" },
-              item.connection === true && { backgroundColor: "#08ff10" },
-              item.connection === false && { backgroundColor: "#ff0808" },
+              situations?.[index] === "red" && { backgroundColor: colors.red },
+              situations?.[index] === "blue" && { backgroundColor: colors.blue },
+              item.connection === true && { backgroundColor: colors.green },
+              item.connection === false && { backgroundColor: colors.red },
             ]}
 
 
