@@ -3,7 +3,7 @@ export const loginAPI = async (
   password: string
 ) => {
   try {
-    const res = await fetch("http://localhost:4000/users/auth/login", {
+    const res = await fetch("http://10.18.70.116:4000/users/auth/login", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({
