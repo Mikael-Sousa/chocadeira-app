@@ -1,6 +1,6 @@
 import { useTheme } from "@/src/hooks/theme/useTheme";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
-import React, { useState } from "react";
+import { useState } from "react";
 import { Pressable, ScrollView, View } from "react-native";
 import { Text } from "@/src/components/ui";
 import { colors } from "@/src/constants/colors";
