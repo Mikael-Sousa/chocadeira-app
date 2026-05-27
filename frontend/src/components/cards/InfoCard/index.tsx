@@ -4,10 +4,10 @@ import React, { useState } from "react";
 import { Pressable, ScrollView, View } from "react-native";
 import { Text } from "@/src/components/ui";
 import { colors } from "@/src/constants/colors";
-import ConnectionGuideModal from "../../modals/Slides";
-import MenuModal from "../../modals/Menu";
-import AppModal from "../../modals/Modal";
-import HistoryModal from "../../modals/History";
+import ConnectionGuideModal from "../../modals/ConnectionGuideModal";
+import SettingsModal from "../../modals/SettingsModal";
+import DetailModal from "../../modals/DetailModal";
+import HistoryModal from "../../modals/HistoryModal";
 import { createStyles } from "./styles";
 import { Props } from "./types";
 
@@ -87,19 +87,20 @@ export default function InfoCard({ data, showModal, title, showMenu, situations,
         <>{contentList}</>
       )}
 
-      <AppModal
+      <DetailModal
         visible={visible}
         setVisible={setVisible}
         data={data}
         selectedItem={selectedItem}
       />
 
-      <MenuModal
+      <SettingsModal
         visible={menuVisible}
         setVisible={setMenuVisible}
         typeMenu={typeMenu?.[selectedItem]}
         setVisibleSlides={setSlidesVisible}
-        connected={data[0].connection} />
+        connected={data[0].connection}
+      />
 
       <ConnectionGuideModal visible={slidesVisible} setVisible={setSlidesVisible} />
 

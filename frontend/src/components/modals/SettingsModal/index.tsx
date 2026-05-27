@@ -13,7 +13,7 @@ import WifiSection from "./sections/WifiSection";
 
 import { Props } from "./types";
 
-export default function MenuModal({
+export default function SettingsModal({
   visible,
   setVisible,
   typeMenu,

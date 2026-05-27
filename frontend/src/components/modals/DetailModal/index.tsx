@@ -6,7 +6,7 @@ import { Modal, Pressable, View } from "react-native";
 import { createStyles } from "./styles";
 import { Props } from "./types";
 
-export default function AppModal({
+export default function DetailModal({
   visible,
   setVisible,
   data,
