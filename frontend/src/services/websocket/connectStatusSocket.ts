@@ -1,3 +1,5 @@
+import { URL } from '../../utils/url';
+
 type Callbacks = {
   onOpen?: () => void;
   onClose?: () => void;
@@ -13,7 +15,7 @@ export function connectStatusSocket({
   onData,
   onAlert,
 }: Callbacks) {
-  const ws = new WebSocket("http://10.18.70.116:4000");
+  const ws = new WebSocket(`${URL}`);
 
   ws.onopen = () => {
     onOpen?.();
