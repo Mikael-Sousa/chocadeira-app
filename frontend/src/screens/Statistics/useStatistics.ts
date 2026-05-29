@@ -1,4 +1,4 @@
-import { useWebSocket } from "@/src/contexts/websocket/useWebSocket";
+import { useWebSocket } from "@/src/hooks/websocket/useWebSocket";
 import { mapDeviceStatusItems } from "./statistics.mapper";
 
 export function useStatistics() {

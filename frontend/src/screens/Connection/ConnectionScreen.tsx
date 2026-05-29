@@ -3,7 +3,7 @@ import InfoCard from "@/src/components/cards/InfoCard";
 import InfoHeader from "@/src/components/headers/InfoHeader";
 import { styles } from "./connection.styles";
 import { useConnection } from "./useConnection";
-import { useWebSocket } from "@/src/contexts/websocket/useWebSocket";
+import { useWebSocket } from "@/src/hooks/websocket/useWebSocket";
 
 export function ConnectionScreen() {
   const { connected } = useWebSocket();

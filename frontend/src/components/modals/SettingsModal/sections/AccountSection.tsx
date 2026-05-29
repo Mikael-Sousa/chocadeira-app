@@ -8,8 +8,7 @@ import { useTheme } from "@/src/hooks/theme/useTheme";
 
 import { createStyles } from "../styles";
 
-import { useAuth } from "@/src/contexts/auth/AuthContext";
-
+import { useAuth } from "@/src/hooks/auth/useAuth";
 
 export default function AccountSection() {
 

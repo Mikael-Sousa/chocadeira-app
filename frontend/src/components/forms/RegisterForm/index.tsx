@@ -12,7 +12,7 @@ import { colors } from "@/src/constants/colors";
 import Input from "@/src/components/inputs/Input";
 import { createStyles } from "./styles";
 import { useRouter } from "expo-router";
-import { useAuth } from "@/src/contexts/auth/AuthContext";
+import { useAuth } from "@/src/hooks/auth/useAuth";
 
 export default function RegisterForm() {
   const { theme } = useTheme();

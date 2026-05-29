@@ -10,7 +10,7 @@ import {
 import { useTheme } from "@/src/hooks/theme/useTheme";
 import { colors } from "@/src/constants/colors";
 import Input from "@/src/components/inputs/Input";
-import { useAuth } from "@/src/contexts/auth/AuthContext";
+import { useAuth } from "@/src/hooks/auth/useAuth";
 import { createStyles } from "./styles";
 import { useRouter } from "expo-router";
 

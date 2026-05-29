@@ -7,7 +7,7 @@ import { Text } from "@/src/components/ui";
 import { useTheme } from "@/src/hooks/theme/useTheme";
 import { colors } from "@/src/constants/colors";
 
-import { useWebSocket } from "@/src/contexts/websocket/useWebSocket";
+import { useWebSocket } from "@/src/hooks/websocket/useWebSocket";
 
 import { createStyles } from "../styles";
 

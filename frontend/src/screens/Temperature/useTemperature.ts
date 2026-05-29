@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { useWebSocket } from "@/src/contexts/websocket/useWebSocket";
+import { useWebSocket } from "@/src/hooks/websocket/useWebSocket";
 import { mapTemperatureItems, mapSituations } from "./temperature.mapper";
 
 export function useTemperature() {
