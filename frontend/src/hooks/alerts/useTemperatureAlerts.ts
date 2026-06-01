@@ -34,7 +34,11 @@ export function useTemperatureAlerts() {
                     );
                     setNotificationSent(prev => ({ ...prev, humidity: true }));
                 }
-                else if (!high && !low) {
+                else if (
+                    !high &&
+                    !low &&
+                    notificationSent.humidity
+                ) {
                     setNotificationSent(prev => ({
                         ...prev,
                         humidity: false,
@@ -70,7 +74,11 @@ export function useTemperatureAlerts() {
                     }));
                 }
 
-                else if (!high && !low) {
+                else if (
+                    !high &&
+                    !low &&
+                    notificationSent.waterTemp
+                ) {
                     setNotificationSent(prev => ({
                         ...prev,
                         waterTemp: false,
@@ -96,8 +104,15 @@ export function useTemperatureAlerts() {
                     );
                     setNotificationSent(prev => ({ ...prev, airTemp: true }));
                 }
-                else if (!high && !low) {
-                    setNotificationSent(prev => ({ ...prev, airTemp: false }));
+                else if (
+                    !high &&
+                    !low &&
+                    notificationSent.airTemp
+                ) {
+                    setNotificationSent(prev => ({
+                        ...prev,
+                        airTemp: false,
+                    }));
                 }
             }
         });
