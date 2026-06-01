@@ -3,9 +3,11 @@ import { ActivityIndicator, View } from "react-native";
 
 import Navbar from "@/src/components/navigation/Navbar";
 import { useAuth } from "@/src/hooks/auth/useAuth";
+import { useTemperatureAlerts } from "@/src/hooks/alerts/useTemperatureAlerts";
 
 export default function TabsLayout() {
   const { authenticated, loading } = useAuth();
+  useTemperatureAlerts();
 
   if (loading) {
     return (

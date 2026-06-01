@@ -1,6 +1,3 @@
-// contexts/NotificationContext.tsx
-
-
 import * as Notifications from 'expo-notifications';
 
 import {
@@ -10,11 +7,13 @@ import {
   useState,
 } from 'react';
 
+import { Platform } from 'react-native';
+
 Notifications.setNotificationHandler({
   handleNotification: async () => ({
     shouldShowBanner: true,
     shouldShowList: true,
-    shouldPlaySound: false,
+    shouldPlaySound: true,
     shouldSetBadge: false,
   }),
 });
@@ -42,6 +41,32 @@ export function NotificationProvider({
   const [permissionGranted, setPermissionGranted] =
     useState(false);
 
+  useEffect(() => {
+    async function configureNotifications() {
+      if (Platform.OS === 'android') {
+        await Notifications.setNotificationChannelAsync(
+          'alerts',
+          {
+            name: 'Alertas',
+            importance:
+              Notifications.AndroidImportance.MAX,
+            vibrationPattern: [
+              0,
+              250,
+              250,
+              250,
+            ],
+            enableVibrate: true,
+            sound: 'default',
+          }
+        );
+      }
+    }
+
+    configureNotifications();
+    checkPermission();
+  }, []);
+
   const checkPermission =
     useCallback(async () => {
       try {
@@ -55,7 +80,7 @@ export function NotificationProvider({
         return granted;
       } catch (error) {
         console.warn(
-          'Erro ao verificar permissão de notificação:',
+          'Erro ao verificar permissão:',
           error
         );
 
@@ -85,16 +110,10 @@ export function NotificationProvider({
 
         setPermissionGranted(granted);
 
-        if (!granted) {
-          console.warn(
-            'Permissão de notificação negada pelo usuário.'
-          );
-        }
-
         return granted;
       } catch (error) {
         console.warn(
-          'Erro ao solicitar permissão de notificação:',
+          'Erro ao solicitar permissão:',
           error
         );
 
@@ -113,10 +132,6 @@ export function NotificationProvider({
             await requestPermission();
 
           if (!granted) {
-            console.warn(
-              'Não foi possível enviar notificação: permissão negada.'
-            );
-
             return;
           }
 
@@ -125,8 +140,10 @@ export function NotificationProvider({
               content: {
                 title,
                 body,
+                sound: 'default',
+                priority:
+                  Notifications.AndroidNotificationPriority.MAX,
               },
-
               trigger: null,
             }
           );
@@ -136,17 +153,13 @@ export function NotificationProvider({
           );
         } catch (error) {
           console.warn(
-            'Erro ao enviar notificação local:',
+            'Erro ao enviar notificação:',
             error
           );
         }
       },
       [requestPermission]
     );
-
-  useEffect(() => {
-    checkPermission();
-  }, [checkPermission]);
 
   return (
     <NotificationContext.Provider

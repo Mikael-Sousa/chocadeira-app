@@ -6,6 +6,7 @@ import { useTemperature } from "./useTemperature";
 import { styles } from "./temperature.styles";
 
 export function TemperatureScreen() {
+  
   const {
     list,
     history,

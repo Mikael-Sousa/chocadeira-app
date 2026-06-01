@@ -24,9 +24,9 @@ export function WebSocketProvider({ children }: { children: React.ReactNode }) {
   }
 });
   const [history, setHistory] = useState<number[][]>([
-    [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-    [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-    [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+    [],
+    [],
+    [],
   ]);
 
   const createSocket = () => {
@@ -81,14 +81,26 @@ export function WebSocketProvider({ children }: { children: React.ReactNode }) {
 function updateHistory(prev: number[][], d: SensorData) {
   const next = [...prev];
 
-  if (d.telemetry.humidity !== undefined)
-    next[0] = [...next[0].slice(1), d.telemetry.humidity];
+  if (d.telemetry.humidity !== undefined) {
+    next[0] = [
+      ...next[0],
+      d.telemetry.humidity,
+    ].slice(-10);
+  }
 
-  if (d.telemetry.water_temperature !== undefined)
-    next[1] = [...next[1].slice(1), d.telemetry.water_temperature];
+  if (d.telemetry.water_temperature !== undefined) {
+    next[1] = [
+      ...next[1],
+      d.telemetry.water_temperature,
+    ].slice(-10);
+  }
 
-  if (d.telemetry.air_temperature !== undefined)
-    next[2] = [...next[2].slice(1), d.telemetry.air_temperature];
+  if (d.telemetry.air_temperature !== undefined) {
+    next[2] = [
+      ...next[2],
+      d.telemetry.air_temperature,
+    ].slice(-10);
+  }
 
   return next;
 }

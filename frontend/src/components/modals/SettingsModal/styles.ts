@@ -1,5 +1,6 @@
 import { StyleSheet } from "react-native";
 import { colors } from "@/src/constants/colors";
+import { enableFreeze } from "react-native-screens";
 
 export function createStyles(theme: any) {
   return StyleSheet.create({
@@ -294,11 +295,11 @@ export function createStyles(theme: any) {
 
     notificationHistoryCard: {
       width: "100%",
-      backgroundColor:theme.background,
+      backgroundColor: theme.background,
       borderRadius: 22,
       padding: 18,
       borderWidth: 1,
-      borderColor:theme.primary,
+      borderColor: theme.primary,
       gap: 16,
     },
 
@@ -368,6 +369,25 @@ export function createStyles(theme: any) {
       fontSize: 13,
       color: theme.secondary,
     },
-  });
+
+    enableNotificationsButton: {
+      marginTop: 10,
+      paddingVertical: 14,
+      paddingHorizontal: 18,
+      borderRadius: 18,
+      backgroundColor: `${theme.primary}18`,
+      justifyContent: "center",
+      alignItems: "center",
+      borderWidth: 2,
+      borderColor: theme.primary,
+
+    },
+
+    enableNotificationsText: {
+      fontSize: 16,
+      fontWeight: "700",
+      color: theme.primary,
+    }
+    });
 }
 
