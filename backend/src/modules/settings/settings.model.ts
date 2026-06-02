@@ -1,4 +1,4 @@
-import db from "../../../shared/database/connection";
+import db from "../../shared/database/connection";
 
 const findByUserId = async (userId: number) => {
     const result = await db.query(

@@ -10,7 +10,7 @@ export default function Navbar() {
   const router = useRouter();
   const styles = createStyles(theme);
 
-  type IconName = "home" | "chart-bar" | "thermometer" | "history" | "cog";
+  type IconName = "home" | "chart-bar" | "thermometer" | "cog";
 
   type Item = {
     icon: IconName;
@@ -21,7 +21,6 @@ export default function Navbar() {
     { icon: "home", route: "/" },
     { icon: "chart-bar", route: "/statistics" },
     { icon: "thermometer", route: "/temperature" },
-    { icon: "history", route: "/history" },
     { icon: "cog", route: "/settings" },
   ];
 

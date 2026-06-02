@@ -1,10 +1,10 @@
 import express from "express"
-import usersRoutes from "../../../modules/users/users.routes"
-import authDeviceRoutes from "../../../modules/device/device.routes"
+import authRoutes from "../../../modules/auth/auth.routes"
+import settingsRoutes from "../../../modules/settings/settings.routes"
 
 const router = express.Router()
 
-router.use("/users", usersRoutes)
-router.use("/auth-device", authDeviceRoutes)
+router.use("/auth", authRoutes)
+router.use("/settings", settingsRoutes)
 
 export default router

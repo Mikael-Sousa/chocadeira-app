@@ -1,4 +1,4 @@
-import db from "../../../shared/database/connection"
+import db from "../../shared/database/connection"
 
 const findByEmail = async (email: string) => {
     const result = await db.query(

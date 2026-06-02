@@ -7,15 +7,13 @@ import { colors } from "@/src/constants/colors";
 import ConnectionGuideModal from "../../modals/ConnectionGuideModal";
 import SettingsModal from "../../modals/SettingsModal";
 import DetailModal from "../../modals/DetailModal";
-import HistoryModal from "../../modals/HistoryModal";
 import { createStyles } from "./styles";
 import { Props } from "./types";
 
-export default function InfoCard({ data, showModal, title, showMenu, situations, showSlides, typeMenu, showHistory }: Props) {
+export default function InfoCard({ data, showModal, title, showMenu, situations, showSlides, typeMenu }: Props) {
   const [visible, setVisible] = useState(false);
   const [menuVisible, setMenuVisible] = useState(false);
   const [slidesVisible, setSlidesVisible] = useState(false)
-  const [historyVisible, setHistoryVisible] = useState(false)
   const [selectedItem, setSelectedItem] = useState<number>(0);
 
   const { theme } = useTheme();
@@ -46,11 +44,6 @@ export default function InfoCard({ data, showModal, title, showMenu, situations,
 
             if (showMenu) {
               setMenuVisible(true);
-              return;
-            }
-
-            if (showHistory) {
-              setHistoryVisible(true);
               return;
             }
 
@@ -104,11 +97,6 @@ export default function InfoCard({ data, showModal, title, showMenu, situations,
 
       <ConnectionGuideModal visible={slidesVisible} setVisible={setSlidesVisible} />
 
-      <HistoryModal
-        visible={historyVisible}
-        setVisible={setHistoryVisible}
-
-      />
     </View>
   );
 }

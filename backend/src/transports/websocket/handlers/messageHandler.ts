@@ -2,7 +2,6 @@ import { WebSocket, RawData } from "ws";
 import { clients } from "../clients/clientManager";
 import { createMessage } from "../messages/createMessage";
 import { broadcast } from "../utils/broadcast";
-import deviceService from "../../../modules/device/device.service"
 import { IncomingMessage } from "../types/messages.types";
 
 export async function messageHandler(ws: WebSocket, msg: RawData): Promise<void> {
@@ -16,11 +15,6 @@ export async function messageHandler(ws: WebSocket, msg: RawData): Promise<void>
 
   if (data.type === "auth") {
     try {
-      const result = await deviceService.authenticateDevice(data.deviceId);
-
-      if (result.status === 401) {
-        await deviceService.register(data.deviceId);
-      }
 
        clients.set(ws, { deviceId: data.deviceId });
 
