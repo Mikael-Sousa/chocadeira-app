@@ -1,6 +1,10 @@
-import { createContext, ReactNode, useState } from "react";
+import { createContext, ReactNode, useEffect, useState } from "react";
 import { useFonts } from "expo-font";
 import { colors } from "@/src/constants/colors";
+import { getSettingsAPI } from "@/src/services/api/settings/getSettings";
+import { putSettingsAPI } from "@/src/services/api/settings/putSettings";
+import { getToken } from "@/src/services/auth/storage";
+
 
 type ThemeType = {
   primary: string;
@@ -40,14 +44,40 @@ const dark: ThemeType = {
 };
 
 export function ThemeProvider({ children }: { children: ReactNode }) {
+  
   const [theme, setTheme] = useState<ThemeType>(light);
 
   const [fontsLoaded] = useFonts({
     "Caprasimo-Regular": require("../../assets/fonts/Caprasimo-Regular.ttf"),
   });
 
+  useEffect(() => {
+    getThemeFromSettings();
+  }, []);
+
+  async function getThemeFromSettings() {
+    const token = await getToken();
+    if (!token) return;
+
+    const response = await getSettingsAPI(token);
+    if (!response.defaultTheme) {
+      setTheme(dark);
+    }
+  }
+
+    async function putThemeInSettings() {
+
+    const token = await getToken();
+    if (!token) return; 
+
+    await putSettingsAPI(token, {
+      defaultTheme: theme.surface === dark.surface
+    });
+  }
+
   function toggleTheme() {
     setTheme((prev) => (prev === light ? dark : light));
+    putThemeInSettings();
   }
 
   if (!fontsLoaded) return null;

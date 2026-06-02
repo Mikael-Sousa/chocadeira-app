@@ -5,7 +5,7 @@ export const loginAPI = async (
   password: string
 ) => {
   try {
-    const res = await fetch(`${URL}/users/auth/login`, {
+    const res = await fetch(`${URL}/auth/login`, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({

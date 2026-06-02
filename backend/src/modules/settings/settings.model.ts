@@ -22,17 +22,17 @@ const create = async (userId: number) => {
     return result.rows[0];
 };
 
-const update = async (userId: number, data: { notificationsEnabled: boolean }) => {
+const update = async (userId: number, data: { defaultTheme: boolean }) => {
     const result = await db.query(
         `
     UPDATE user_settings
     SET
-      notifications_enabled = $1
+      default_theme = $1
     WHERE user_id = $2
     RETURNING *
     `,
         [
-            data.notificationsEnabled,
+            data.defaultTheme,
             userId
         ]
     );

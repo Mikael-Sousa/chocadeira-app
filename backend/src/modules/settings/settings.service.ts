@@ -25,7 +25,7 @@ const getSettings = async (userId: number) => {
   };
 };
 
-const updateSettings = async (userId: number, data: { notificationsEnabled: boolean }) => {
+const updateSettings = async (userId: number, data: { defaultTheme: boolean }) => {
   const updated = await settingsModel.update(userId, data);
 
   if (!updated) {
