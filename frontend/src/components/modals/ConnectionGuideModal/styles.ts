@@ -17,6 +17,8 @@ export function createStyles(theme: any) {
       padding: 20,
       alignItems: "center",
       position: "relative",
+      borderWidth: 2,
+      borderColor: theme.primary,
     },
 
     title: {

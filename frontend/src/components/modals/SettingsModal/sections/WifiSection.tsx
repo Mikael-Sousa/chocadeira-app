@@ -14,13 +14,11 @@ import { createStyles } from "../styles";
 type Props = {
   connected?: boolean;
   setVisible: (value: boolean) => void;
-  setVisibleSlides?: (value: boolean) => void;
 };
 
 export default function WifiSection({
   connected,
   setVisible,
-  setVisibleSlides,
 }: Props) {
 
   const { theme } = useTheme();

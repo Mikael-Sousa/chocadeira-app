@@ -33,8 +33,8 @@ export function createStyles(theme: any) {
       shadowRadius: 20,
       elevation: 12,
 
-      borderWidth: 1.5,
-      borderColor: `${theme.primary}40`,
+      borderWidth: 2,
+      borderColor: theme.primary,
     },
 
     headerIconContainer: {

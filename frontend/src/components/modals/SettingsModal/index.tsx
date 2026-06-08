@@ -17,7 +17,6 @@ export default function SettingsModal({
   visible,
   setVisible,
   typeMenu,
-  setVisibleSlides,
   connected,
 }: Props) {
 
@@ -55,7 +54,6 @@ export default function SettingsModal({
           <WifiSection
             connected={connected}
             setVisible={setVisible}
-            setVisibleSlides={setVisibleSlides}
           />
         );
 
