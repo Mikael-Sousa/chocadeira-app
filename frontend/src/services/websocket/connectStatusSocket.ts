@@ -1,4 +1,6 @@
 import { URL } from '../../utils/url';
+import { postNotificationsAPI } from '../api/notifications/postNotifications';
+import { getToken } from '../auth/storage';
 
 type Callbacks = {
   onOpen?: () => void;
@@ -6,6 +8,7 @@ type Callbacks = {
   onError?: () => void;
   onData: (data: any) => void;
   onAlert: (msg: string) => void;
+  onSendNotification: (title: string, message: string) => void;
 };
 
 export function connectStatusSocket({
@@ -14,6 +17,7 @@ export function connectStatusSocket({
   onError,
   onData,
   onAlert,
+  onSendNotification,
 }: Callbacks) {
   const ws = new WebSocket(`${URL}`);
 
@@ -44,8 +48,22 @@ export function connectStatusSocket({
     }
   };
 
-  ws.onerror = () => {
+  ws.onerror = async () => {
+    const token = await getToken();
     onError?.();
+    onSendNotification(
+      'Conexão perdida',
+      'A conexão Wi-fi foi perdida.'
+    );
+    await postNotificationsAPI(
+      token,
+      {
+        sensor: 'wifi_signal',
+        status: 'error',
+        value: 0,
+      }
+    );
+
   };
 
   ws.onclose = () => {

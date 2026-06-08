@@ -3,9 +3,11 @@ import { Alert } from "react-native";
 import { WebSocketContext } from "./WebSocketContext";
 import { connectStatusSocket } from "@/src/services/websocket";
 import { SensorData } from "@/src/types/data";
+import { useNotification } from "@/src/hooks/notification/useNotification";
 
 export function WebSocketProvider({ children }: { children: React.ReactNode }) {
   const socketRef = useRef<WebSocket | null>(null);
+  const { sendNotification } = useNotification();
 
   const [connected, setConnected] = useState(false);
   const [sensorData, setSensorData] = useState<SensorData>({
@@ -39,6 +41,7 @@ export function WebSocketProvider({ children }: { children: React.ReactNode }) {
       setHistory((prev) => updateHistory(prev, d));
     },
     onAlert: (msg) => Alert.alert("Alerta do sistema", msg),
+    onSendNotification: sendNotification,
   });
 };
 

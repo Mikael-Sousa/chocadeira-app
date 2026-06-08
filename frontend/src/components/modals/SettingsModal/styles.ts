@@ -354,6 +354,34 @@ export function createStyles(theme: any) {
       color: theme.secondary,
     },
 
+    notificationEmptyCard: {
+      width: "100%",
+      backgroundColor: `${theme.primary}15`,
+      borderRadius: 22,
+      padding: 20,
+      borderWidth: 1,
+      borderColor: theme.primary,
+      gap: 14,
+      justifyContent: "center",
+    },
+
+    notificationEmptyHeader: {
+      flexDirection: "row",
+      alignItems: "center",
+      gap: 12,
+    },
+
+    notificationEmptyIcon: {
+      fontSize: 24,
+      color: theme.primary,
+    },
+
+    notificationEmptyText: {
+      fontSize: 14,
+      lineHeight: 22,
+      color: theme.secondary,
+    },
+
     notificationFooter: {
       flexDirection: "row",
       alignItems: "center",

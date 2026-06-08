@@ -2,6 +2,9 @@ import { useEffect, useState } from 'react';
 
 import { useNotification } from '../notification/useNotification';
 import { useWebSocket } from '../websocket/useWebSocket';
+import { getToken } from "@/src/services/auth/storage";
+
+import { postNotificationsAPI } from '@/src/services/api/notifications/postNotifications';
 
 export function useTemperatureAlerts() {
     const { sendNotification } = useNotification();
@@ -14,7 +17,9 @@ export function useTemperatureAlerts() {
     })
 
     useEffect(() => {
-        history.forEach((row, index) => {
+        history.forEach(async (row, index) => {
+            const token = await getToken();
+            
             if (row.length < 10) return;
 
             if (index === 0) {
@@ -25,12 +30,28 @@ export function useTemperatureAlerts() {
                         'Umidade Baixa',
                         'A umidade está muito baixa!'
                     );
+                    await postNotificationsAPI(
+                        token,
+                        {
+                            sensor: 'humidity',
+                            status: 'low',
+                            value: row[row.length - 1],
+                        }
+                    );
                     setNotificationSent(prev => ({ ...prev, humidity: true }));
                 }
                 else if (!notificationSent.humidity && high) {
                     sendNotification(
                         'Umidade Alta',
                         'A umidade está muito alta!'
+                    );
+                    await postNotificationsAPI(
+                        token,
+                        {
+                            sensor: 'humidity',
+                            status: 'high',
+                            value: row[row.length - 1],
+                        }
                     );
                     setNotificationSent(prev => ({ ...prev, humidity: true }));
                 }
@@ -55,6 +76,14 @@ export function useTemperatureAlerts() {
                         'Temperatura Alta',
                         'A temperatura da água está muito alta!'
                     );
+                    await postNotificationsAPI(
+                        token,
+                        {
+                            sensor: 'water_temperature',
+                            status: 'high',
+                            value: row[row.length - 1],
+                        }
+                    );
 
                     setNotificationSent(prev => ({
                         ...prev,
@@ -66,6 +95,14 @@ export function useTemperatureAlerts() {
                     sendNotification(
                         'Temperatura Baixa',
                         'A temperatura da água está muito baixa!'
+                    );
+                    await postNotificationsAPI(
+                        token,
+                        {
+                            sensor: 'water_temperature',
+                            status: 'low',
+                            value: row[row.length - 1],
+                        }
                     );
 
                     setNotificationSent(prev => ({
@@ -94,6 +131,14 @@ export function useTemperatureAlerts() {
                         'Temperatura Alta',
                         'A temperatura do ar está muito alta!'
                     );
+                    await postNotificationsAPI(
+                        token,
+                        {
+                            sensor: 'air_temperature',
+                            status: 'high',
+                            value: row[row.length - 1],
+                        }
+                    );
                     setNotificationSent(prev => ({ ...prev, airTemp: true }));
                 }
 
@@ -101,6 +146,14 @@ export function useTemperatureAlerts() {
                     sendNotification(
                         'Temperatura Baixa',
                         'A temperatura do ar está muito baixa!'
+                    );
+                    await postNotificationsAPI(
+                        token,
+                        {
+                            sensor: 'air_temperature',
+                            status: 'low',
+                            value: row[row.length - 1],
+                        }
                     );
                     setNotificationSent(prev => ({ ...prev, airTemp: true }));
                 }
