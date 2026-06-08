@@ -65,26 +65,37 @@ export default function ConnectionGuideModal({
                         </Text>
 
                         <View style={styles.card}>
-                            <MaterialCommunityIcons
-                                name={step.card.icon}
-                                size={28}
-                                color={theme.primary}
-                            />
+                            <View style={styles.iconWrapper}>
+                                <MaterialCommunityIcons
+                                    name={step.card.icon}
+                                    size={44}
+                                    color={theme.primary}
+                                />
+                            </View>
                             <Text style={styles.cardTitle}>
                                 {step.card.title}
                             </Text>
                         </View>
 
                         {step.cardSecondary && (
-                            <View style={styles.card}>
-                                <MaterialCommunityIcons
-                                    name={step.cardSecondary.icon}
-                                    size={28}
-                                    color={theme.primary}
-                                />
-                                <Text style={styles.cardTitle}>
-                                    {step.cardSecondary.title}
-                                </Text>
+                            <View style={styles.cardRow}>
+                                <View style={styles.smallCard}>
+                                    <MaterialCommunityIcons
+                                        name={step.card.icon}
+                                        size={28}
+                                        color={theme.primary}
+                                    />
+                                    <Text style={styles.smallCardTitle}>{step.card.title}</Text>
+                                </View>
+
+                                <View style={styles.smallCard}>
+                                    <MaterialCommunityIcons
+                                        name={step.cardSecondary.icon}
+                                        size={28}
+                                        color={theme.primary}
+                                    />
+                                    <Text style={styles.smallCardTitle}>{step.cardSecondary.title}</Text>
+                                </View>
                             </View>
                         )}
 

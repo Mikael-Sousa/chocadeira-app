@@ -5,7 +5,6 @@ export type Props = {
   showModal?: boolean;
   showMenu?: boolean;
   showSlides?: boolean;
-  setVisibleSlides?: (value: boolean) => void;
   title?: string;
   typeMenu?: string[];
   situations?: string[];

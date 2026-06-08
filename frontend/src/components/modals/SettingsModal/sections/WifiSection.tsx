@@ -65,27 +65,6 @@ export default function WifiSection({
             : "Conectar"}
         </Text>
       </Pressable>
-
-      <Pressable
-        style={styles.menuItem}
-        onPress={() => {
-
-          if (setVisibleSlides) {
-            setVisibleSlides(true);
-          }
-
-          setVisible(false);
-        }}
-      >
-        <MaterialCommunityIcons
-          name="help-rhombus-outline"
-          style={styles.icon}
-        />
-
-        <Text style={styles.menuText}>
-          Tutorial
-        </Text>
-      </Pressable>
     </>
   );
 }

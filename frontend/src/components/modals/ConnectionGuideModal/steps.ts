@@ -17,8 +17,7 @@ export const connectionSteps: ConnectionStep[] = [
   {
     id: "1",
     title: "Ligue o ESP32",
-    description:
-      "Conecte o ESP32 à energia e aguarde alguns segundos até ele iniciar.",
+    description: "Ligue o dispositivo.",
     card: {
       title: "Dispositivo",
       icon: "power-plug",
@@ -26,9 +25,8 @@ export const connectionSteps: ConnectionStep[] = [
   },
   {
     id: "2",
-    title: "Conecte-se ao Wi-Fi do ESP",
-    description:
-      "No celular, vá em Configurações → Wi-Fi e conecte-se à rede do dispositivo.",
+    title: "Conecte ao Wi‑Fi do ESP",
+    description: "No celular, conecte-se à rede do dispositivo.",
     card: {
       title: "ESP32_Config",
       icon: "wifi",
@@ -37,8 +35,7 @@ export const connectionSteps: ConnectionStep[] = [
   {
     id: "3",
     title: "Abra o navegador",
-    description:
-      "Com o celular conectado ao Wi-Fi do ESP, abra o navegador (Chrome, Firefox, etc.).",
+    description: "Abra o navegador no celular.",
     card: {
       title: "Navegador",
       icon: "web",
@@ -46,9 +43,8 @@ export const connectionSteps: ConnectionStep[] = [
   },
   {
     id: "4",
-    title: "Acesse a página de configuração",
-    description:
-      "Digite 123.456.789 na barra de endereço do navegador e pressione Enter.",
+    title: "Acesse a página",
+    description: "Digite 123.456.789 no navegador.",
     card: {
       title: "123.456.789",
       icon: "magnify",
@@ -56,9 +52,8 @@ export const connectionSteps: ConnectionStep[] = [
   },
   {
     id: "5",
-    title: "Informe os dados do Wi-Fi",
-    description:
-      "Digite o nome e a senha do seu Wi-Fi e toque em Salvar.",
+    title: "Informe sua rede",
+    description: "Insira rede e senha e toque em Salvar.",
     card: {
       title: "Rede Wi-Fi",
       icon: "wifi",
@@ -70,9 +65,8 @@ export const connectionSteps: ConnectionStep[] = [
   },
   {
     id: "6",
-    title: "Aguarde a conexão",
-    description:
-      "O ESP32 salvará os dados e se conectará ao Wi-Fi automaticamente.",
+    title: "Aguarde",
+    description: "O dispositivo vai se conectar automaticamente.",
     card: {
       title: "Conectando",
       icon: "loading",
@@ -80,9 +74,8 @@ export const connectionSteps: ConnectionStep[] = [
   },
   {
     id: "7",
-    title: "Conecte-se ao Wi-Fi configurado",
-    description:
-      "Volte às configurações de Wi-Fi do celular e conecte-se à mesma rede informada no ESP32.",
+    title: "Volte ao seu Wi‑Fi",
+    description: "Conecte o celular à rede configurada.",
     card: {
       title: "Wi-Fi",
       icon: "wifi-check",
@@ -90,9 +83,8 @@ export const connectionSteps: ConnectionStep[] = [
   },
   {
     id: "8",
-    title: "Abra o aplicativo",
-    description:
-      "Ao abrir o aplicativo, o dispositivo já estará conectado automaticamente.",
+    title: "Pronto!",
+    description: "Aplicativo e dispositivo conectados.",
     card: {
       title: "Conexão concluída",
       icon: "check-circle-outline",

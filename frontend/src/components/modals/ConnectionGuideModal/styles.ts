@@ -30,7 +30,7 @@ export function createStyles(theme: any) {
     slide: {
       width: "100%",
       alignItems: "center",
-      paddingVertical: 12,
+      paddingVertical: 8,
     },
 
     stepTitle: {
@@ -42,33 +42,75 @@ export function createStyles(theme: any) {
     },
 
     card: {
-      flexDirection: "row",
+      width: "90%",
       alignItems: "center",
       justifyContent: "center",
-      width: "90%",
-      gap: 8,
-      paddingVertical: 20,
-      paddingHorizontal: 24,
+      paddingVertical: 18,
+      paddingHorizontal: 20,
       backgroundColor: theme.background,
-      marginBottom: 16,
+      marginBottom: 12,
+      borderRadius: 14,
+      borderWidth: 0,
+      shadowColor: "#000",
+      shadowOffset: { width: 0, height: 6 },
+      shadowOpacity: 0.08,
+      shadowRadius: 12,
+      elevation: 6,
+    },
+
+    iconWrapper: {
+      width: 80,
+      height: 80,
+      borderRadius: 40,
+      backgroundColor: theme.surface,
+      alignItems: "center",
+      justifyContent: "center",
+      marginBottom: 8,
       borderWidth: 1,
       borderColor: theme.secondary,
-      borderRadius: 16,
+    },
+
+    cardRow: {
+      flexDirection: "row",
+      gap: 12,
+      width: "100%",
+      justifyContent: "center",
+      marginBottom: 12,
+    },
+
+    smallCard: {
+      flex: 1,
+      alignItems: "center",
+      justifyContent: "center",
+      paddingVertical: 10,
+      paddingHorizontal: 8,
+      backgroundColor: theme.background,
+      borderRadius: 12,
+      borderWidth: 1,
+      borderColor: theme.secondary,
+    },
+
+    smallCardTitle: {
+      fontSize: 12,
+      color: theme.primary,
+      marginTop: 6,
+      fontWeight: "500",
     },
 
     cardTitle: {
-      fontSize: 14,
-      fontWeight: "500",
+      fontSize: 16,
+      fontWeight: "600",
       color: theme.primary,
+      textAlign: "center",
     },
 
     description: {
-      fontSize: 14,
+      fontSize: 13,
       color: theme.secondary,
       textAlign: "center",
-      lineHeight: 20,
-      marginBottom: 20,
-      paddingHorizontal: 8,
+      lineHeight: 18,
+      marginBottom: 16,
+      paddingHorizontal: 12,
     },
 
     pagination: {

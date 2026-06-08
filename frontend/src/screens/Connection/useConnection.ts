@@ -15,8 +15,8 @@ export function useConnection(connected: boolean) {
 
   const lastConnection: Item[] = [
     {
-      icon: "view-dashboard-outline",
-      title: "204.225-70",
+      icon: "help-rhombus-outline",
+      title: "Tutorial",
     },
   ];
 

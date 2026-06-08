@@ -22,8 +22,8 @@ export function ConnectionScreen() {
 
       <InfoCard
         data={lastConnection}
-        title="Última conexão"
-        situations={[]}
+        title="Como conectar?"
+        showSlides={true}
       />
     </View>
   );
