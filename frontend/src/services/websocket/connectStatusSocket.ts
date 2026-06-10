@@ -1,6 +1,8 @@
+import { useEffect } from 'react';
 import { URL } from '../../utils/url';
 import { postNotificationsAPI } from '../api/notifications/postNotifications';
 import { getToken } from '../auth/storage';
+import { useAuth } from '@/src/hooks/auth/useAuth';
 
 type Callbacks = {
   onOpen?: () => void;
@@ -11,7 +13,9 @@ type Callbacks = {
   onSendNotification: (title: string, message: string) => void;
 };
 
-export function connectStatusSocket({
+// Custom Hook para gerenciar conexão WebSocket com servidor.
+// Recebe callbacks para responder a eventos de conexão, mensagens e erros.
+export function useConnectStatusSocket({
   onOpen,
   onClose,
   onError,
@@ -19,56 +23,66 @@ export function connectStatusSocket({
   onAlert,
   onSendNotification,
 }: Callbacks) {
-  const ws = new WebSocket(`${URL}`);
+  const { user } = useAuth();
 
-  ws.onopen = () => {
-    onOpen?.();
-    ws.send(
-      JSON.stringify({
-        type: "register",
-        deviceId: "APP-01",
-      })
-    );
-  };
+  useEffect(() => {
+    if (!user?.id) return;
 
-  ws.onmessage = (event) => {
-    let json: any;
-    try {
-      json = JSON.parse(event.data);
-    } catch {
-      return;
-    }
+    const ws = new WebSocket(`${URL}`);
 
-    if (json.type === "alert") {
-      onAlert(json.payload.mensagem);
-    }
+    ws.onopen = async () => {
+      onOpen?.();
+      // Envia evento de autenticação ao servidor com o userId.
+      ws.send(
+        JSON.stringify({
+          type: "APP-AUTH",
+          user_id: user?.id,
+        })
+      );
+    };
 
-    if (json.type === "data") {
-      onData(json.payload);
-    }
-  };
-
-  ws.onerror = async () => {
-    const token = await getToken();
-    onError?.();
-    onSendNotification(
-      'Conexão perdida',
-      'A conexão Wi-fi foi perdida.'
-    );
-    await postNotificationsAPI(
-      token,
-      {
-        sensor: 'wifi_signal',
-        status: 'error',
-        value: 0,
+    ws.onmessage = (event) => {
+      let json: any;
+      try {
+        json = JSON.parse(event.data);
+      } catch {
+        return;
       }
-    );
 
-  };
+      // Processa diferentes tipos de mensagem recebidas do servidor.
+      if (json.type === "alert") {
+        onAlert(json.payload.mensagem);
+      }
 
-  ws.onclose = () => {
-    onClose?.();
-  };
+      if (json.type === "data") {
+        onData(json.payload);
+      }
+    };
 
-  return ws;
+    ws.onerror = async () => {
+      const token = await getToken();
+      onError?.();
+      onSendNotification(
+        'Conexão perdida',
+        'A conexão Wi-fi foi perdida.'
+      );
+      await postNotificationsAPI(
+        token,
+        {
+          sensor: 'wifi_signal',
+          status: 'error',
+          value: 0,
+        }
+      );
+    };
+
+    ws.onclose = () => {
+      onClose?.();
+    };
+
+    return () => {
+      ws.close();
+    };
+  }, [user?.id, onOpen, onClose, onError, onData, onAlert, onSendNotification]);
 }
+

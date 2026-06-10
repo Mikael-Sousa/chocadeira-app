@@ -1,38 +1,38 @@
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useState } from "react";
 import { Alert } from "react-native";
 import { WebSocketContext } from "./WebSocketContext";
-import { connectStatusSocket } from "@/src/services/websocket";
+import { useConnectStatusSocket } from "@/src/services/websocket";
 import { SensorData } from "@/src/types/data";
 import { useNotification } from "@/src/hooks/notification/useNotification";
 
 export function WebSocketProvider({ children }: { children: React.ReactNode }) {
-  const socketRef = useRef<WebSocket | null>(null);
   const { sendNotification } = useNotification();
 
   const [connected, setConnected] = useState(false);
   const [sensorData, setSensorData] = useState<SensorData>({
-  telemetry: {
-    water_temperature: 0,
-    air_temperature: 0,
-    humidity: 0,
-    timestamp: ""
-  },
-  status: {
-    uptime: 0,
-    time_to_hatch: 0,
-    daily_rotations: 0,
-    is_door_open: false,
-    expected_hatch_date: ""
-  }
-});
+    telemetry: {
+      water_temperature: 0,
+      air_temperature: 0,
+      humidity: 0,
+      timestamp: ""
+    },
+    status: {
+      uptime: 0,
+      time_to_hatch: 0,
+      daily_rotations: 0,
+      is_door_open: false,
+      expected_hatch_date: ""
+    }
+  });
   const [history, setHistory] = useState<number[][]>([
     [],
     [],
     [],
   ]);
 
-  const createSocket = () => {
-  socketRef.current = connectStatusSocket({
+  // Setup WebSocket connection using the custom hook.
+  // O hook gerencia a conexão e a limpeza automaticamente.
+  useConnectStatusSocket({
     onOpen: () => setConnected(true),
     onClose: () => setConnected(false),
     onError: () => setConnected(false),
@@ -43,28 +43,14 @@ export function WebSocketProvider({ children }: { children: React.ReactNode }) {
     onAlert: (msg) => Alert.alert("Alerta do sistema", msg),
     onSendNotification: sendNotification,
   });
-};
-
 
   const connect = () => {
-  if (socketRef.current) return;
-  createSocket();
-};
-
-
-  const disconnect = () => {
-    socketRef.current?.close();
-    socketRef.current = null;
+    setConnected(true);
   };
 
-  useEffect(() => {
-    createSocket();
-
-    return () => {
-      socketRef.current?.close();
-    };
-  }, []);
-
+  const disconnect = () => {
+    setConnected(false);
+  };
 
   return (
     <WebSocketContext.Provider

@@ -1,6 +1,6 @@
 import { WebSocketServer } from "ws";
-import { messageHandler } from "./handlers/messageHandler";
-import { clients } from "./clients/clientManager";
+import { messageHandler } from "./handlers/message.handler";
+import { clients } from "./clients/client.manager";
 
 export function setupWS(wss: WebSocketServer) {
   wss.on("connection", (ws) => {

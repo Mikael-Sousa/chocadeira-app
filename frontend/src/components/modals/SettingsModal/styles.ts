@@ -1,6 +1,5 @@
 import { StyleSheet } from "react-native";
 import { colors } from "@/src/constants/colors";
-import { enableFreeze } from "react-native-screens";
 
 export function createStyles(theme: any) {
   return StyleSheet.create({

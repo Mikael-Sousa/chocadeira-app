@@ -13,7 +13,6 @@ function onDataFake() {
       water_temperature: Number((37.7 + Math.random() * 0.2).toFixed(2)),
       air_temperature: Number((38.4 + Math.random() * 0.2).toFixed(2)),
       humidity: Math.floor(51 + Math.random() * 3),
-      timestamp: Date.now(),
     },
     status: {
       uptime: Math.floor(process.uptime()),
@@ -33,7 +32,7 @@ export function simulator(wss: WebSocketServer, port: number) {
     wss.clients.forEach((client: any) => {
       if (client.readyState === WebSocket.OPEN) {
         client.send(JSON.stringify({
-          type: "data",
+          type: "DATA",
           deviceId: "SIMULADOR",
           payload
         }));
