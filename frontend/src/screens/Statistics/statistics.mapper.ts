@@ -8,11 +8,6 @@ function formatUptime(seconds: number): string {
   return `${hours}h ${minutes}min`;
 }
 
-function formatDays(seconds: number): string {
-  const days = Math.floor(seconds / 86400);
-  return `${days} dias`;
-}
-
 function formatDate(date: string): string {
   return new Date(date).toLocaleDateString("pt-BR");
 }
@@ -26,15 +21,6 @@ export function mapDeviceStatusItems(data: SensorData): Item[] {
         data.status.uptime === undefined
           ? "--"
           : formatUptime(data.status.uptime),
-    },
-
-    {
-      icon: "egg-outline",
-      title: "Tempo p/ Eclosão",
-      hiddenStatus:
-        data.status.time_to_hatch === undefined
-          ? "--"
-          : formatDays(data.status.time_to_hatch),
     },
 
     {
@@ -59,7 +45,7 @@ export function mapDeviceStatusItems(data: SensorData): Item[] {
 
     {
       icon: "calendar-month-outline",
-      title: "Data Prevista",
+      title: "Data p/ Eclosão",
       hiddenStatus:
         data.status.expected_hatch_date === undefined
           ? "--"

@@ -71,7 +71,7 @@ export async function messageHandler(ws: WebSocket, msg: RawData): Promise<void>
                 payload: {
                   expected_hatch_date:
                     device.expected_hatch_date,
-                  status:
+                  status: 
                     device.incubation_status
                 }
               })

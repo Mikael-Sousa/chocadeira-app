@@ -16,7 +16,6 @@ function onDataFake() {
     },
     status: {
       uptime: Math.floor(process.uptime()),
-      time_to_hatch: 20 * 24 * 60 * 60, 
       daily_rotations: 6,
       is_door_open: Math.random() > 0.8,
       expected_hatch_date: futureDate(20)
@@ -32,8 +31,8 @@ export function simulator(wss: WebSocketServer, port: number) {
     wss.clients.forEach((client: any) => {
       if (client.readyState === WebSocket.OPEN) {
         client.send(JSON.stringify({
-          type: "DATA",
-          deviceId: "SIMULADOR",
+          type: "data",
+          device_id: "SIMULADOR",
           payload
         }));
       }

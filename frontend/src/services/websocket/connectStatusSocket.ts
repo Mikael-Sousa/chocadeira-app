@@ -32,7 +32,7 @@ export function useConnectStatusSocket({
 
     ws.onopen = async () => {
       onOpen?.();
-      // Envia evento de autenticação ao servidor com o userId.
+      // Envia evento de autenticação ao servidor com o user_id.
       ws.send(
         JSON.stringify({
           type: "APP-AUTH",
@@ -49,12 +49,7 @@ export function useConnectStatusSocket({
         return;
       }
 
-      // Processa diferentes tipos de mensagem recebidas do servidor.
-      if (json.type === "alert") {
-        onAlert(json.payload.mensagem);
-      }
-
-      if (json.type === "data") {
+      if (json.type === "DATA") {
         onData(json.payload);
       }
     };
