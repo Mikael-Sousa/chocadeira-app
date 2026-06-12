@@ -25,10 +25,9 @@ export function createStyles(theme: any) {
 
     modalTitle: {
       fontSize: 26,
-      fontWeight: "800",
+      fontWeight: "600",
       marginBottom: 20,
       color: theme.primary,
-      textTransform: "uppercase",
     },
 
     menuItem: {
@@ -146,7 +145,7 @@ export function createStyles(theme: any) {
 
     accountName: {
       fontSize: 24,
-      fontWeight: "800",
+      fontWeight: "600",
       color: theme.primary,
     },
 
@@ -183,7 +182,7 @@ export function createStyles(theme: any) {
 
     accountButtonText: {
       fontSize: 16,
-      fontWeight: "700",
+      fontWeight: "600",
       color: theme.primary,
     },
 
@@ -209,7 +208,7 @@ export function createStyles(theme: any) {
 
     logoutText: {
       fontSize: 16,
-      fontWeight: "800",
+      fontWeight: "600",
       color: colors.white,
     },
     aboutContainer: {
@@ -236,13 +235,14 @@ export function createStyles(theme: any) {
     },
 
     aboutAppName: {
-      fontSize: 28,
-      fontWeight: "900",
+      fontSize: 24,
+      fontWeight: "600",
       color: theme.primary,
     },
 
     aboutVersion: {
       fontSize: 14,
+      fontWeight: "600",
       color: theme.secondary,
     },
 
@@ -342,7 +342,6 @@ export function createStyles(theme: any) {
 
     notificationHistoryTitle: {
       fontSize: 16,
-      fontWeight: "800",
       color: theme.primary,
       marginBottom: 4,
     },
@@ -412,7 +411,7 @@ export function createStyles(theme: any) {
 
     enableNotificationsText: {
       fontSize: 16,
-      fontWeight: "700",
+      fontWeight: "600",
       color: theme.primary,
     }
     });

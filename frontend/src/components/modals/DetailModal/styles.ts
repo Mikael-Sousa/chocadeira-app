@@ -54,7 +54,7 @@ export function createStyles(theme: any) {
 
     modalTitle: {
       fontSize: 36,
-      fontWeight: "800",
+      fontWeight: "600",
       color: theme.text,
       textAlign: "center",
       marginBottom: 14,
@@ -73,7 +73,7 @@ export function createStyles(theme: any) {
 
     modalValue: {
       fontSize: 32,
-      fontWeight: "900",
+      fontWeight: "600",
       color: theme.primary,
       textAlign: "center",
     },

@@ -58,7 +58,7 @@ export default function AboutSection() {
             />
 
             <Text style={styles.aboutText}>
-              Desenvolvido com React Native + ESP32.
+              Desenvolvido com React Native + Expo Go.
             </Text>
           </View>
 
@@ -78,7 +78,7 @@ export default function AboutSection() {
         </View>
 
         <Text style={styles.aboutFooter}>
-          © 2026 Smart Hatch
+          © 2026 IFmaker
         </Text>
 
       </View>

@@ -31,7 +31,7 @@ export function simulator(wss: WebSocketServer, port: number) {
     wss.clients.forEach((client: any) => {
       if (client.readyState === WebSocket.OPEN) {
         client.send(JSON.stringify({
-          type: "data",
+          type: "DATA",
           device_id: "SIMULADOR",
           payload
         }));
