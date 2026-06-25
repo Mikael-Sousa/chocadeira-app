@@ -1,0 +1,1 @@
+{"version":3,"file":"client.manager.d.ts","sourceRoot":"","sources":["../../../../src/transports/websocket/clients/client.manager.ts"],"names":[],"mappings":"AAAA,OAAO,SAAS,MAAM,IAAI,CAAC;AAE3B,MAAM,MAAM,MAAM,GAAG;IACnB,QAAQ,EAAE,MAAM,CAAC;CAClB,CAAC;AAEF,eAAO,MAAM,OAAO,EAAE,GAAG,CAAC,SAAS,EAAE,MAAM,CAAgC,CAAC"}
