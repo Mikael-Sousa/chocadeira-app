@@ -16,11 +16,11 @@ const wss = new WebSocketServer({ server });
 
 setupWS(wss);
 
-const res = prompt("Is it a simulation? y/n: ");
+/* const res = prompt("Is it a simulation? y/n: ");
 
 if (res === "y") {
   simulator(wss, PORT);
-}
+} */
 
 server.listen(PORT, () => {
   console.log(`HTTP + WS running on port ${PORT}`);
