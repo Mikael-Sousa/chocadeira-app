@@ -1,3 +1,5 @@
+//local test
+/*
 import Constants from 'expo-constants';
 
 function getUrl() {
@@ -11,6 +13,10 @@ function getUrl() {
   const ip = hostUri.split(':')[0];
 
   return `http://${ip}:4000`;
+} */
+
+function getUrl() {
+  return "https://chocadeira-app-production.up.railway.app"
 }
 
 export const URL = getUrl();
