@@ -60,41 +60,48 @@ export default function ConnectionGuideModal({
                     <Text style={styles.title}>Como conectar</Text>
 
                     <View style={styles.slide}>
-                        <Text style={styles.stepTitle}>
-                            {step.title}
-                        </Text>
+                        {step.cardSecondary ? (
+                            <View>
+                                <Text style={styles.stepTitle}>
+                                    {step.title}
+                                </Text>
+                                <View style={styles.cardRow}>
+                                    <View style={styles.smallCard}>
+                                        <MaterialCommunityIcons
+                                            name={step.card.icon}
+                                            size={28}
+                                            color={theme.primary}
+                                        />
+                                        <Text style={styles.smallCardTitle}>{step.card.title}</Text>
+                                    </View>
 
-                        <View style={styles.card}>
-                            <View style={styles.iconWrapper}>
-                                <MaterialCommunityIcons
-                                    name={step.card.icon}
-                                    size={44}
-                                    color={theme.primary}
-                                />
-                            </View>
-                            <Text style={styles.cardTitle}>
-                                {step.card.title}
-                            </Text>
-                        </View>
-
-                        {step.cardSecondary && (
-                            <View style={styles.cardRow}>
-                                <View style={styles.smallCard}>
-                                    <MaterialCommunityIcons
-                                        name={step.card.icon}
-                                        size={28}
-                                        color={theme.primary}
-                                    />
-                                    <Text style={styles.smallCardTitle}>{step.card.title}</Text>
+                                    <View style={styles.smallCard}>
+                                        <MaterialCommunityIcons
+                                            name={step.cardSecondary.icon}
+                                            size={28}
+                                            color={theme.primary}
+                                        />
+                                        <Text style={styles.smallCardTitle}>{step.cardSecondary.title}</Text>
+                                    </View>
                                 </View>
+                            </View>
+                        ) : (
+                            <View>
+                                <Text style={styles.stepTitle}>
+                                    {step.title}
+                                </Text>
 
-                                <View style={styles.smallCard}>
-                                    <MaterialCommunityIcons
-                                        name={step.cardSecondary.icon}
-                                        size={28}
-                                        color={theme.primary}
-                                    />
-                                    <Text style={styles.smallCardTitle}>{step.cardSecondary.title}</Text>
+                                <View style={styles.card}>
+                                    <View style={styles.iconWrapper}>
+                                        <MaterialCommunityIcons
+                                            name={step.card.icon}
+                                            size={44}
+                                            color={theme.primary}
+                                        />
+                                    </View>
+                                    <Text style={styles.cardTitle}>
+                                        {step.card.title}
+                                    </Text>
                                 </View>
                             </View>
                         )}
