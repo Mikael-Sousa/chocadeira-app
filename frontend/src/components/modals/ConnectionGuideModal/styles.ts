@@ -8,31 +8,59 @@ export function createStyles(theme: any) {
       backgroundColor: colors.overlayBlack60,
       justifyContent: "center",
       alignItems: "center",
+      paddingHorizontal: 20,
+      paddingVertical: 24,
     },
 
     modalView: {
-      width: "90%",
+      width: "100%",
+      maxWidth: 420,
+      maxHeight: "90%",
       backgroundColor: theme.surface,
-      borderRadius: 16,
-      padding: 20,
+      borderRadius: 18,
+      padding: 16,
       alignItems: "center",
-      position: "relative",
       borderWidth: 2,
       borderColor: theme.primary,
+    },
+
+    header: {
+      width: "100%",
+      flexDirection: "row",
+      alignItems: "center",
+      justifyContent: "center",
+      marginBottom: 8,
+      position: "relative",
     },
 
     title: {
       fontSize: 20,
       fontWeight: "600",
       color: theme.primary,
-      marginBottom: 16,
       fontFamily: theme.fontRegular,
+      textAlign: "center",
+    },
+
+    scrollView: {
+      width: "100%",
+      maxHeight: "100%",
+    },
+
+    scrollContent: {
+      width: "100%",
+      alignItems: "center",
+      paddingBottom: 8,
     },
 
     slide: {
       width: "100%",
       alignItems: "center",
-      paddingVertical: 8,
+      paddingVertical: 4,
+    },
+
+    contentBlock: {
+      width: "100%",
+      alignItems: "center",
     },
 
     stepTitle: {
@@ -40,24 +68,20 @@ export function createStyles(theme: any) {
       fontWeight: "600",
       color: theme.primary,
       textAlign: "center",
-      marginBottom: 12,
+      marginBottom: 10,
     },
 
     card: {
-      width: "90%",
+      width: "100%",
       alignItems: "center",
       justifyContent: "center",
-      paddingVertical: 18,
-      paddingHorizontal: 20,
+      paddingVertical: 16,
+      paddingHorizontal: 16,
       backgroundColor: theme.background,
       marginBottom: 12,
       borderRadius: 14,
-      borderWidth: 0,
-      shadowColor: "#000",
-      shadowOffset: { width: 0, height: 6 },
-      shadowOpacity: 0.08,
-      shadowRadius: 12,
-      elevation: 6,
+      borderWidth: 1,
+      borderColor: theme.secondary,
     },
 
     iconWrapper: {
@@ -74,22 +98,26 @@ export function createStyles(theme: any) {
 
     cardRow: {
       flexDirection: "row",
-      gap: 12,
       width: "100%",
-      justifyContent: "center",
+      justifyContent: "space-between",
+      alignItems: "stretch",
       marginBottom: 12,
     },
 
     smallCard: {
-      flex: 1,
+      width: "48%",
+      marginHorizontal: 4,
       alignItems: "center",
       justifyContent: "center",
-      paddingVertical: 10,
+      paddingVertical: 12,
       paddingHorizontal: 8,
       backgroundColor: theme.background,
       borderRadius: 12,
       borderWidth: 1,
       borderColor: theme.secondary,
+      minHeight: 120,
+      height: 120,
+      flexShrink: 0,
     },
 
     smallCardTitle: {
@@ -97,6 +125,8 @@ export function createStyles(theme: any) {
       color: theme.primary,
       marginTop: 6,
       fontWeight: "500",
+      textAlign: "center",
+      maxWidth: "100%",
     },
 
     cardTitle: {
@@ -111,14 +141,15 @@ export function createStyles(theme: any) {
       color: theme.secondary,
       textAlign: "center",
       lineHeight: 18,
-      marginBottom: 16,
-      paddingHorizontal: 12,
+      marginBottom: 12,
+      paddingHorizontal: 8,
+      width: "100%",
     },
 
     pagination: {
       flexDirection: "row",
-      gap: 6,
-      marginTop: 8,
+      marginTop: 6,
+      alignItems: "center",
     },
 
     dot: {
@@ -127,6 +158,7 @@ export function createStyles(theme: any) {
       borderRadius: 4,
       backgroundColor: theme.secondary,
       opacity: 0.4,
+      marginHorizontal: 3,
     },
 
     dotActive: {
@@ -139,13 +171,13 @@ export function createStyles(theme: any) {
       width: "100%",
       flexDirection: "row",
       justifyContent: "space-between",
-      marginTop: 12,
+      marginTop: 10,
+      paddingHorizontal: 4,
     },
 
     closeButton: {
       position: "absolute",
-      top: 12,
-      right: 12,
+      right: 0,
       padding: 6,
     },
   });
