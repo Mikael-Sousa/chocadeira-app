@@ -7,6 +7,18 @@ exports.messageHandler = messageHandler;
 const client_manager_1 = require("../clients/client.manager");
 const create_message_1 = require("../messages/create.message");
 const devices_service_1 = __importDefault(require("../../../modules/devices/devices.service"));
+function isAppAuthMessage(message) {
+    return message.type === "APP_AUTH";
+}
+function isDeviceAuthMessage(message) {
+    return message.type === "DEVICE_AUTH";
+}
+function isDataMessage(message) {
+    return message.type === "DATA";
+}
+function isIncubationMessage(message) {
+    return message.type === "INCUBATION_STARTED" || message.type === "INCUBATION_CANCELLED";
+}
 async function messageHandler(ws, msg) {
     let receivedData;
     try {
@@ -36,8 +48,14 @@ async function messageHandler(ws, msg) {
     }
     switch (receivedData.type) {
         case "APP_AUTH": {
+            if (!isAppAuthMessage(receivedData)) {
+                return;
+            }
             try {
-                client_manager_1.clients.set(ws, { deviceId: receivedData.user_id });
+                (0, client_manager_1.registerClient)(ws, {
+                    kind: "app",
+                    userId: receivedData.user_id
+                });
             }
             catch (err) {
                 console.error("Auth error:", err);
@@ -55,8 +73,12 @@ async function messageHandler(ws, msg) {
             break;
         }
         case "DEVICE_AUTH": {
+            if (!isDeviceAuthMessage(receivedData)) {
+                return;
+            }
             try {
-                client_manager_1.clients.set(ws, {
+                (0, client_manager_1.registerClient)(ws, {
+                    kind: "device",
                     deviceId: receivedData.device_id
                 });
                 const device = await devices_service_1.default.getDeviceById(receivedData.device_id);
@@ -87,6 +109,9 @@ async function messageHandler(ws, msg) {
             break;
         }
         case "DATA": {
+            if (!isDataMessage(receivedData)) {
+                return;
+            }
             try {
                 console.log("Received DATA from device:", receivedData.device_id, receivedData.payload);
                 const response = (0, create_message_1.createMessage)({
@@ -99,6 +124,14 @@ async function messageHandler(ws, msg) {
                     }
                 });
                 ws.send(JSON.stringify(response));
+                const appPayload = (0, create_message_1.createMessage)({
+                    type: "DATA",
+                    device_id: receivedData.device_id,
+                    payload: receivedData.payload
+                });
+                for (const appClient of (0, client_manager_1.getAppClients)()) {
+                    appClient.send(JSON.stringify(appPayload));
+                }
             }
             catch (err) {
                 console.error("Error processing DATA message:", err);
@@ -116,6 +149,9 @@ async function messageHandler(ws, msg) {
             break;
         }
         case "INCUBATION_STARTED": {
+            if (!isIncubationMessage(receivedData) || receivedData.type !== "INCUBATION_STARTED") {
+                return;
+            }
             try {
                 // Atualiza o estado do dispositivo no serviço e retorna a nova data prevista de nascimento.
                 const result = await devices_service_1.default.startIncubation(receivedData.device_id);
@@ -148,6 +184,9 @@ async function messageHandler(ws, msg) {
             break;
         }
         case "INCUBATION_CANCELLED": {
+            if (!isIncubationMessage(receivedData) || receivedData.type !== "INCUBATION_CANCELLED") {
+                return;
+            }
             try {
                 await devices_service_1.default.cancelIncubation(receivedData.device_id);
                 console.log("Incubation cancelled for device:", receivedData.device_id);

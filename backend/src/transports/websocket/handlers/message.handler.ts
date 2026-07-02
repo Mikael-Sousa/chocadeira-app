@@ -1,8 +1,24 @@
 import { WebSocket, RawData } from "ws";
-import { clients } from "../clients/client.manager";
+import { clients, getAppClients, registerClient } from "../clients/client.manager";
 import { createMessage } from "../messages/create.message";
 import { IncomingMessage } from "../types/messages.types";
 import devicesService from "../../../modules/devices/devices.service";
+
+function isAppAuthMessage(message: IncomingMessage): message is Extract<IncomingMessage, { type: "APP_AUTH" }> {
+  return message.type === "APP_AUTH";
+}
+
+function isDeviceAuthMessage(message: IncomingMessage): message is Extract<IncomingMessage, { type: "DEVICE_AUTH" }> {
+  return message.type === "DEVICE_AUTH";
+}
+
+function isDataMessage(message: IncomingMessage): message is Extract<IncomingMessage, { type: "DATA" }> {
+  return message.type === "DATA";
+}
+
+function isIncubationMessage(message: IncomingMessage): message is Extract<IncomingMessage, { type: "INCUBATION_STARTED" | "INCUBATION_CANCELLED" }> {
+  return message.type === "INCUBATION_STARTED" || message.type === "INCUBATION_CANCELLED";
+}
 
 export async function messageHandler(ws: WebSocket, msg: RawData): Promise<void> {
   let receivedData: IncomingMessage;
@@ -37,8 +53,15 @@ export async function messageHandler(ws: WebSocket, msg: RawData): Promise<void>
   switch (receivedData.type) {
 
     case "APP_AUTH": {
+      if (!isAppAuthMessage(receivedData)) {
+        return;
+      }
+
       try {
-        clients.set(ws, { deviceId: receivedData.user_id });
+        registerClient(ws, {
+          kind: "app",
+          userId: receivedData.user_id
+        });
       } catch (err) {
         console.error("Auth error:", err);
 
@@ -58,8 +81,13 @@ export async function messageHandler(ws: WebSocket, msg: RawData): Promise<void>
     }
 
     case "DEVICE_AUTH": {
+      if (!isDeviceAuthMessage(receivedData)) {
+        return;
+      }
+
       try {
-        clients.set(ws, {
+        registerClient(ws, {
+          kind: "device",
           deviceId: receivedData.device_id
         });
 
@@ -99,6 +127,10 @@ export async function messageHandler(ws: WebSocket, msg: RawData): Promise<void>
     }
 
     case "DATA": {
+      if (!isDataMessage(receivedData)) {
+        return;
+      }
+
       try {
         console.log("Received DATA from device:", receivedData.device_id, receivedData.payload);
 
@@ -113,6 +145,16 @@ export async function messageHandler(ws: WebSocket, msg: RawData): Promise<void>
         });
 
         ws.send(JSON.stringify(response));
+
+        const appPayload = createMessage({
+          type: "DATA",
+          device_id: receivedData.device_id,
+          payload: receivedData.payload
+        });
+
+        for (const appClient of getAppClients()) {
+          appClient.send(JSON.stringify(appPayload));
+        }
       } catch (err) {
         console.error("Error processing DATA message:", err);
 
@@ -132,6 +174,10 @@ export async function messageHandler(ws: WebSocket, msg: RawData): Promise<void>
     }
 
     case "INCUBATION_STARTED": {
+      if (!isIncubationMessage(receivedData) || receivedData.type !== "INCUBATION_STARTED") {
+        return;
+      }
+
       try {
         // Atualiza o estado do dispositivo no serviço e retorna a nova data prevista de nascimento.
         const result = await devicesService.startIncubation(receivedData.device_id);
@@ -168,6 +214,10 @@ export async function messageHandler(ws: WebSocket, msg: RawData): Promise<void>
     }
 
     case "INCUBATION_CANCELLED": {
+      if (!isIncubationMessage(receivedData) || receivedData.type !== "INCUBATION_CANCELLED") {
+        return;
+      }
+
       try {
         await devicesService.cancelIncubation(receivedData.device_id);
         console.log("Incubation cancelled for device:", receivedData.device_id);

@@ -1,6 +1,6 @@
 import { WebSocketServer } from "ws";
 import { messageHandler } from "./handlers/message.handler";
-import { clients } from "./clients/client.manager";
+import { clients, unregisterClient } from "./clients/client.manager";
 
 export function setupWS(wss: WebSocketServer) {
   wss.on("connection", (ws) => {
@@ -12,8 +12,8 @@ export function setupWS(wss: WebSocketServer) {
 
     ws.on("close", () => {
       const c = clients.get(ws);
-      clients.delete(ws);
-      if (c) console.log("disconnected:", c.deviceId);
+      unregisterClient(ws);
+      if (c) console.log("disconnected:", c.deviceId ?? c.userId);
     });
   });
 }

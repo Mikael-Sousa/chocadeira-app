@@ -35,7 +35,7 @@ export function useConnectStatusSocket({
       // Envia evento de autenticação ao servidor com o user_id.
       ws.send(
         JSON.stringify({
-          type: "APP-AUTH",
+          type: "APP_AUTH",
           user_id: user?.id,
         })
       );

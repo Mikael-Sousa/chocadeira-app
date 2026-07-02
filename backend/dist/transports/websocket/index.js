@@ -11,9 +11,9 @@ function setupWS(wss) {
         });
         ws.on("close", () => {
             const c = client_manager_1.clients.get(ws);
-            client_manager_1.clients.delete(ws);
+            (0, client_manager_1.unregisterClient)(ws);
             if (c)
-                console.log("disconnected:", c.deviceId);
+                console.log("disconnected:", c.deviceId ?? c.userId);
         });
     });
 }
