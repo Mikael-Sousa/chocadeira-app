@@ -90,27 +90,53 @@ export default function NotificationsSection() {
                     notifications[index]?.status === "low" ? styles.notificationLowIcon :
                       styles.notificationWarningIcon}>
                     <MaterialCommunityIcons
-                      name={notifications[index]?.status === "high" ? "thermometer-high" :
-                        notifications[index]?.status === "low" ? "thermometer-low" : "wifi-alert"}
+                      name={notifications[index]?.status === "high" ?
+                        notifications[index]?.sensor === "humidity" ? "water-percent" :
+                        notifications[index]?.sensor === "air_temperature" ? "thermometer-high" :
+                        notifications[index]?.sensor === "water_temperature" ? "thermometer-high" :
+                        "thermometer-high"
+                        : notifications[index]?.status === "low" ?
+                        notifications[index]?.sensor === "humidity" ? "water-percent" :
+                        notifications[index]?.sensor === "air_temperature" ? "thermometer-low" :
+                        notifications[index]?.sensor === "water_temperature" ? "thermometer-low" :
+                        "thermometer-low"
+                        : "wifi-alert"}
                       style={styles.notificationIcon}
                     />
                   </View>
 
                   <View style={{ flex: 1 }}>
                     <Text style={styles.notificationHistoryTitle}>
-                      {notifications[index]?.status === "high" ? "Temperatura Alta" :
-                        notifications[index]?.status === "low" ? "Temperatura Baixa" : "Wi-Fi Desconectado"}
+                      {notifications[index]?.status === "high" ?
+                        notifications[index]?.sensor === "humidity" ? "Umidade Alta" :
+                        notifications[index]?.sensor === "air_temperature" ? "Temperatura Alta" :
+                        notifications[index]?.sensor === "water_temperature" ? "Temperatura Alta" :
+                        "Alerta" :
+                        notifications[index]?.status === "low" ?
+                        notifications[index]?.sensor === "humidity" ? "Umidade Baixa" :
+                        notifications[index]?.sensor === "air_temperature" ? "Temperatura Baixa" :
+                        notifications[index]?.sensor === "water_temperature" ? "Temperatura Baixa" :
+                        "Alerta" :
+                          "Wi-Fi Desconectado"}
                     </Text>
 
                     <Text style={styles.notificationHistoryText}>
                       {notifications[index]?.status === "high" ? 
-                      notifications[index]?.sensor === "air_temperature" ?
-                       `A temperatura do ar atingiu ${notifications[index]?.value}°C` :
-                       `A temperatura da água atingiu ${notifications[index]?.value}°C` :
-                        notifications[index]?.status === "low" ?
+                        notifications[index]?.sensor === "humidity" ?
+                          `A umidade atingiu ${notifications[index]?.value}%` :
                         notifications[index]?.sensor === "air_temperature" ?
-                       `A temperatura do ar caiu para ${notifications[index]?.value}°C` :
-                       `A temperatura da água caiu para ${notifications[index]?.value}°C` :
+                          `A temperatura do ar atingiu ${notifications[index]?.value}°C` :
+                        notifications[index]?.sensor === "water_temperature" ?
+                          `A temperatura da água atingiu ${notifications[index]?.value}°C` :
+                          "Alerta crítico detectado" :
+                        notifications[index]?.status === "low" ?
+                          notifications[index]?.sensor === "humidity" ?
+                            `A umidade caiu para ${notifications[index]?.value}%` :
+                          notifications[index]?.sensor === "air_temperature" ?
+                            `A temperatura do ar caiu para ${notifications[index]?.value}°C` :
+                          notifications[index]?.sensor === "water_temperature" ?
+                            `A temperatura da água caiu para ${notifications[index]?.value}°C` :
+                            "Alerta crítico detectado" :
                           "Conexão Wi-Fi perdida"}
                     </Text>
                   </View>
