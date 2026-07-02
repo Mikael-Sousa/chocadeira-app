@@ -3,11 +3,10 @@ Object.defineProperty(exports, "__esModule", { value: true });
 const pg_1 = require("pg");
 require("dotenv/config");
 const db = new pg_1.Pool({
-    host: process.env.DB_HOST,
-    port: Number(process.env.DB_PORT),
-    user: process.env.DB_USER,
-    password: process.env.DB_PASS,
-    database: process.env.DB_NAME
+    connectionString: process.env.DATABASE_URL,
+    ssl: {
+        rejectUnauthorized: false,
+    },
 });
 exports.default = db;
 //# sourceMappingURL=connection.js.map

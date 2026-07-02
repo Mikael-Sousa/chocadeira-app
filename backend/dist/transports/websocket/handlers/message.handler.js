@@ -36,13 +36,21 @@ async function messageHandler(ws, msg) {
     }
     switch (receivedData.type) {
         case "APP_AUTH": {
-            // Para mensagens de autenticação de app, apenas valida a conexão.
             try {
                 client_manager_1.clients.set(ws, { deviceId: receivedData.user_id });
             }
             catch (err) {
                 console.error("Auth error:", err);
-                ws.close();
+                const errorResponse = (0, create_message_1.createMessage)({
+                    type: "ACK",
+                    device_id: receivedData.user_id ?? "unknown",
+                    payload: {
+                        event: "APP_AUTH",
+                        status: "error",
+                        message: "Failed to authenticate app connection"
+                    }
+                });
+                ws.send(JSON.stringify(errorResponse));
             }
             break;
         }
@@ -52,8 +60,7 @@ async function messageHandler(ws, msg) {
                     deviceId: receivedData.device_id
                 });
                 const device = await devices_service_1.default.getDeviceById(receivedData.device_id);
-                if (device &&
-                    device.incubation_status === "active") {
+                if (device && device.incubation_status === "active") {
                     ws.send(JSON.stringify((0, create_message_1.createMessage)({
                         type: "INCUBATION_DATE",
                         device_id: receivedData.device_id,
@@ -64,8 +71,18 @@ async function messageHandler(ws, msg) {
                     })));
                 }
             }
-            catch {
-                ws.close();
+            catch (err) {
+                console.error("Device auth error:", err);
+                const errorResponse = (0, create_message_1.createMessage)({
+                    type: "ACK",
+                    device_id: receivedData.device_id,
+                    payload: {
+                        event: "DEVICE_AUTH",
+                        status: "error",
+                        message: "Failed to authenticate device"
+                    }
+                });
+                ws.send(JSON.stringify(errorResponse));
             }
             break;
         }

@@ -37,50 +37,62 @@ export async function messageHandler(ws: WebSocket, msg: RawData): Promise<void>
   switch (receivedData.type) {
 
     case "APP_AUTH": {
-      // Para mensagens de autenticação de app, apenas valida a conexão.
       try {
-
         clients.set(ws, { deviceId: receivedData.user_id });
       } catch (err) {
         console.error("Auth error:", err);
-        ws.close();
+
+        const errorResponse = createMessage({
+          type: "ACK",
+          device_id: receivedData.user_id ?? "unknown",
+          payload: {
+            event: "APP_AUTH",
+            status: "error",
+            message: "Failed to authenticate app connection"
+          }
+        });
+
+        ws.send(JSON.stringify(errorResponse));
       }
       break;
     }
 
     case "DEVICE_AUTH": {
       try {
-
         clients.set(ws, {
           deviceId: receivedData.device_id
         });
 
-        const device = await devicesService.getDeviceById(
-          receivedData.device_id
-        );
+        const device = await devicesService.getDeviceById(receivedData.device_id);
 
-        if (
-          device &&
-          device.incubation_status === "active"
-        ) {
+        if (device && device.incubation_status === "active") {
           ws.send(
             JSON.stringify(
               createMessage({
                 type: "INCUBATION_DATE",
                 device_id: receivedData.device_id,
                 payload: {
-                  expected_hatch_date:
-                    device.expected_hatch_date,
-                  status: 
-                    device.incubation_status
+                  expected_hatch_date: device.expected_hatch_date,
+                  status: device.incubation_status
                 }
               })
             )
           );
         }
+      } catch (err) {
+        console.error("Device auth error:", err);
 
-      } catch {
-        ws.close();
+        const errorResponse = createMessage({
+          type: "ACK",
+          device_id: receivedData.device_id,
+          payload: {
+            event: "DEVICE_AUTH",
+            status: "error",
+            message: "Failed to authenticate device"
+          }
+        });
+
+        ws.send(JSON.stringify(errorResponse));
       }
 
       break;
