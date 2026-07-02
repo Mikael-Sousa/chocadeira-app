@@ -18,42 +18,47 @@ function formatDate(date: string | null | undefined): string {
 }
 
 export function mapDeviceStatusItems(data: SensorData): Item[] {
-  const status = data?.payload?.status ?? {}
+  const status = data?.status ?? {}
+
+  const uptime =
+    typeof status.uptime === "number"
+      ? formatUptime(status.uptime)
+      : "--";
+  const rotationsToday =
+    typeof status.rotations_today === "number"
+      ? `${status.rotations_today} giros`
+      : "--";
+  const doorState =
+    typeof status.is_door_open === "boolean"
+      ? status.is_door_open
+        ? "Aberta"
+        : "Fechada"
+      : "--";
+  const hatchDate = formatDate(status.expected_hatch_date);
 
   return [
     {
       icon: "clock-outline",
       title: "Tempo Ligado",
-      hiddenStatus:
-        typeof status.uptime === "number"
-          ? formatUptime(status.uptime)
-          : "--",
+      hiddenStatus: uptime,
     },
 
     {
       icon: "sync",
       title: "Giros Diários",
-      hiddenStatus:
-        typeof status.rotations_today === "number"
-          ? `${status.rotations_today} giros`
-          : "--",
+      hiddenStatus: rotationsToday,
     },
 
     {
       icon: "door-open",
       title: "Estado da Porta",
-      hiddenStatus:
-        typeof status.is_door_open === "boolean"
-          ? status.is_door_open
-            ? "Aberta"
-            : "Fechada"
-          : "--",
+      hiddenStatus: doorState,
     },
 
     {
       icon: "calendar-month-outline",
       title: "Data p/ Eclosão",
-      hiddenStatus: formatDate(status.expected_hatch_date),
+      hiddenStatus: hatchDate,
     },
   ];
 }

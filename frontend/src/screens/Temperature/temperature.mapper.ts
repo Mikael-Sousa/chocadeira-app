@@ -2,7 +2,7 @@ import { Item } from "@/src/components/cards/InfoCard/types";
 import { SensorData } from "@/src/types/data";
 
 export function mapTemperatureItems(data: SensorData): Item[] {
-  const telemetry = data?.payload?.telemetry ?? {};
+  const telemetry = data?.telemetry ?? {};
 
   return [
     {
