@@ -127,7 +127,15 @@ async function messageHandler(ws, msg) {
                 const appPayload = (0, create_message_1.createMessage)({
                     type: "DATA",
                     device_id: receivedData.device_id,
-                    payload: receivedData.payload
+                    payload: {
+                        telemetry: receivedData.payload.telemetry,
+                        status: {
+                            uptime: receivedData.payload.status.uptime,
+                            daily_rotations: receivedData.payload.status.daily_rotations ?? receivedData.payload.status.rotations_today ?? 0,
+                            is_door_open: receivedData.payload.status.is_door_open,
+                            expected_hatch_date: receivedData.payload.status.expected_hatch_date ?? null,
+                        }
+                    }
                 });
                 for (const appClient of (0, client_manager_1.getAppClients)()) {
                     appClient.send(JSON.stringify(appPayload));

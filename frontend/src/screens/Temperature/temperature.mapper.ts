@@ -2,30 +2,32 @@ import { Item } from "@/src/components/cards/InfoCard/types";
 import { SensorData } from "@/src/types/data";
 
 export function mapTemperatureItems(data: SensorData): Item[] {
+  const telemetry = data?.payload?.telemetry ?? {};
+
   return [
     {
       icon: "thermometer",
       title: "Umidade",
       status:
-        data.telemetry.humidity === undefined
-          ? "--"
-          : `${data.telemetry.humidity.toFixed(1)} %`,
+        typeof telemetry.humidity === "number"
+          ? `${telemetry.humidity.toFixed(1)} %`
+          : "--",
     },
     {
       icon: "water",
       title: "Temp. da Água",
       status:
-        data.telemetry.water_temperature === undefined
-          ? "--"
-          : `${data.telemetry.water_temperature.toFixed(1)} °C`,
+        typeof telemetry.water_temperature === "number"
+          ? `${telemetry.water_temperature.toFixed(1)} °C`
+          : "--",
     },
     {
       icon: "weather-windy",
       title: "Temp. do Ar",
       status:
-        data.telemetry.air_temperature === undefined
-          ? "--"
-          : `${data.telemetry.air_temperature.toFixed(1)} °C`,
+        typeof telemetry.air_temperature === "number"
+          ? `${telemetry.air_temperature.toFixed(1)} °C`
+          : "--",
     },
   ];
 }

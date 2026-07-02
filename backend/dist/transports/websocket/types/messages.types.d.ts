@@ -13,7 +13,8 @@ type Telemetry = {
 };
 type DeviceStatus = {
     uptime: number;
-    rotations_today: number;
+    daily_rotations: number;
+    rotations_today?: number;
     is_door_open: boolean;
     expected_hatch_date: string | null;
 };

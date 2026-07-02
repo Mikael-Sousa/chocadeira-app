@@ -8,48 +8,52 @@ function formatUptime(seconds: number): string {
   return `${hours}h ${minutes}min`;
 }
 
-function formatDate(date: string): string {
-  return new Date(date).toLocaleDateString("pt-BR");
+function formatDate(date: string | null | undefined): string {
+  if (!date) return "--";
+
+  const parsedDate = new Date(date);
+  if (Number.isNaN(parsedDate.getTime())) return "--";
+
+  return parsedDate.toLocaleDateString("pt-BR");
 }
 
 export function mapDeviceStatusItems(data: SensorData): Item[] {
+  const status = data?.payload?.status ?? {}
+
   return [
     {
       icon: "clock-outline",
       title: "Tempo Ligado",
       hiddenStatus:
-        data.status.uptime === undefined
-          ? "--"
-          : formatUptime(data.status.uptime),
+        typeof status.uptime === "number"
+          ? formatUptime(status.uptime)
+          : "--",
     },
 
     {
       icon: "sync",
       title: "Giros Diários",
       hiddenStatus:
-        data.status.daily_rotations === undefined
-          ? "--"
-          : `${data.status.daily_rotations} giros`,
+        typeof status.rotations_today === "number"
+          ? `${status.rotations_today} giros`
+          : "--",
     },
 
     {
       icon: "door-open",
       title: "Estado da Porta",
       hiddenStatus:
-        data.status.is_door_open === undefined
-          ? "--"
-          : data.status.is_door_open
+        typeof status.is_door_open === "boolean"
+          ? status.is_door_open
             ? "Aberta"
-            : "Fechada",
+            : "Fechada"
+          : "--",
     },
 
     {
       icon: "calendar-month-outline",
       title: "Data p/ Eclosão",
-      hiddenStatus:
-        data.status.expected_hatch_date === undefined
-          ? "--"
-          : formatDate(data.status.expected_hatch_date),
+      hiddenStatus: formatDate(status.expected_hatch_date),
     },
   ];
 }
