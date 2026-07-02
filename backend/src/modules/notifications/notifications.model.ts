@@ -18,7 +18,7 @@ const create = async (
 
 const findByUserId = async (userId: number) => {
     const result = await db.query(
-        `SELECT * FROM user_notifications WHERE user_id = $1 ORDER BY created_at DESC`,
+        `SELECT * FROM user_notifications WHERE user_id = $1 ORDER BY created_at DESC LIMIT 25`,
         [userId]
     );
 
