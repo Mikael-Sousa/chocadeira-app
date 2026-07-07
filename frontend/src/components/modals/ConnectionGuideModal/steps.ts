@@ -44,9 +44,9 @@ export const connectionSteps: ConnectionStep[] = [
   {
     id: "4",
     title: "Acesse a página",
-    description: "Digite 123.456.789 no navegador.",
+    description: "Digite 192.168.4.1 no navegador.",
     card: {
-      title: "123.456.789",
+      title: "192.168.4.1",
       icon: "magnify",
     },
   },
