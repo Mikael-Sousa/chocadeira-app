@@ -12,6 +12,7 @@ export function createStyles(theme: any) {
       color: theme.text,
       fontSize: FONTS.fontSize1,
       fontWeight: "600",
+      fontFamily: theme.fontRegular,
     },
 
     inputContainer: {
@@ -32,6 +33,7 @@ export function createStyles(theme: any) {
       paddingVertical: 14,
       color: theme.text,
       fontSize: FONTS.fontSize1,
+      fontFamily: theme.fontRegular,
     },
 
     icon: {

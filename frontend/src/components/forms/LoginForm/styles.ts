@@ -21,7 +21,8 @@ export function createStyles(theme: any) {
     buttonText: {
       color: theme.background,
       fontSize: FONTS.fontSize1,
-      fontWeight: "700",
+      fontWeight: "400",
+      fontFamily: theme.fontRegular,
     },
     registerButton: {
       marginTop: 16,
@@ -32,8 +33,9 @@ export function createStyles(theme: any) {
     registerButtonText: {
       color: theme.primary,
       fontSize: 16,
-      fontWeight: "600",
+      fontWeight: "400",
       textDecorationLine: "underline",
+      fontFamily: theme.fontRegular,
     },
   });
 }
